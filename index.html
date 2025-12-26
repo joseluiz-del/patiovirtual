@@ -1,16 +1,249 @@
-<!DOCTYPE html><html><head><meta charset='utf-8'>
+<!DOCTYPE html>
+<!-- saved from url=(0087)file:///C:/Users/HxTos/Desktop/Port%20Automation/HXtos%20CY/HXtosCY%20Vistoria%207.html -->
+<html lang="pt-br"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HXtos CY — Vistoria 7 Pontos (Gate Layout • Light)</title>
 <style>
-body {background:#080b0e;color:#eef3f8;font-family:Montserrat,Arial;padding:20px;}
-.nav a{margin-right:10px;color:#53b2ff;text-decoration:none;border:1px solid #172233;padding:6px 10px;border-radius:8px;}
-.nav a:hover{color:#00e0bb;border-color:#00e0bb;}
-h1{margin-top:20px;}
+
+:root{
+  --bg:#f6f8fb;--panel:#ffffff;--panel2:#f5f7fa;--border:#d6dbe0;
+  --muted:#64748b;--text:#1f2937;--brand:#0ea5e9;--accent:#10b981;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font:14px/1.4 system-ui,Segoe UI,Roboto,Helvetica,Arial}
+.container{max-width:1220px;margin:0 auto;padding:16px}
+.topbar{position:sticky;top:0;z-index:10;background:rgba(245,247,250,.9);backdrop-filter:saturate(1.1) blur(4px);border-bottom:1px solid var(--border)}
+.topwrap{display:flex;align-items:center;justify-content:space-between;padding:12px 20px;max-width:1220px;margin:0 auto}
+.brand{display:flex;gap:12px;align-items:center}
+.brand-badge{width:36px;height:36px;border-radius:10px;background:rgba(14,165,233,.12);outline:1px solid rgba(14,165,233,.4);display:grid;place-items:center;color:#0369a1}
+.h1{font-weight:700;font-size:18px}
+.hint{color:var(--muted);font-size:12px;margin-top:2px}
+.btn{border:1px solid var(--border);background:var(--panel);color:var(--text);padding:8px 12px;border-radius:10px;font-size:13px}
+.btn.primary{background:#e0f2fe;border-color:#bae6fd;color:#075985}
+.btn:hover{background:#f8fafc}
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
+.card{border:1px solid var(--border);background:var(--panel);border-radius:14px}
+.card > .head{border-bottom:1px solid var(--border);padding:10px 12px;font-weight:600;color:#0369a1}
+.card > .body{padding:12px}
+.badge{display:inline-block;background:#f1f5f9;border:1px solid var(--border);padding:4px 8px;border-radius:6px}
+.progress{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:12px;margin-top:8px}
+.bar{height:8px;width:190px;background:#e2e8f0;border-radius:999px;overflow:hidden}
+.fill{height:100%;width:50%;background:var(--accent)}
+.point{border:1px solid var(--border);background:#f8fafc;border-radius:12px;padding:12px}
+.point .title{font-size:14px;font-weight:600}
+.point .sub{font-size:12px;color:var(--muted)}
+.actions{display:flex;gap:8px}
+.btn-sm{font-size:12px;padding:6px 8px;border-radius:8px}
+.row{display:grid;grid-template-columns:repeat(12,1fr);gap:8px;margin-top:8px}
+.photo{display:grid;place-items:center;border:1px solid var(--border);background:var(--panel);border-radius:8px;height:32px;color:var(--muted)}
+.ta{width:100%;background:var(--panel);border:1px solid var(--border);border-radius:8px;color:var(--text);padding:8px;font-size:12px}
+.check{display:flex;align-items:center;gap:8px;border:1px solid var(--border);background:#f8fafc;border-radius:8px;padding:8px}
+.kv{border:1px solid var(--border);background:#f8fafc;border-radius:10px;padding:8px}
+.footer{display:flex;align-items:center;justify-content:space-between;color:var(--muted);font-size:12px}
+@media print{
+  @page { size: A4 landscape; margin: 8mm; }
+  body{print-color-adjust:exact;-webkit-print-color-adjust:exact;background:var(--bg)}
+  .topbar{position:static}
+}
+
 </style>
-</head><body>
-<div class="nav">
-  <a href="index.html">Índice</a>
-  <a href="virtual-yard-config.html">Configuração</a>
-  <a href="virtual-yard-dashboard.html">Painel Virtual</a>
-  <a href="ordem-transferencia.html">Ordem de Transferência</a>
-  <a href="smart-decking-multisite.html">Smart Decking</a>
-</div>
-<h1>Índice</h1><p>Selecione a tela desejada acima.</p></body></html>
+</head>
+<body>
+  <div class="topbar">
+    <div class="topwrap">
+      <div class="brand">
+        <div class="brand-badge">✓</div>
+        <div>
+          <div class="h1">HXtos CY — Vistoria 7 Pontos</div>
+          <div class="hint">Layout inspirado no Controle de Gate (Light)</div>
+        </div>
+      </div>
+      <div class="actions">
+        <button class="btn">Salvar</button>
+        <button class="btn primary">Enviar</button>
+        <button class="btn">Imprimir</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="grid">
+      <div class="card" style="grid-column:1/13;padding:12px;">
+        <div class="grid" style="gap:8px;align-items:center">
+          <div style="grid-column:span 3"><span class="badge">MSCU1234567</span> <span class="hint">Contêiner (OCR)</span></div>
+          <div style="grid-column:span 2"><span class="badge">22G1</span> <span class="hint">ISO</span></div>
+          <div style="grid-column:span 2"><span class="badge">ABC1D23</span> <span class="hint">Placa</span></div>
+          <div style="grid-column:span 3"><span class="badge">DTA-123456789</span> <span class="hint">Documento</span></div>
+          <div style="grid-column:span 2;display:flex;align-items:center;gap:8px">
+            <input placeholder="Buscar container/placa" style="width:100%;border:1px solid var(--border);background:var(--panel);color:var(--text);border-radius:8px;padding:6px 8px;font-size:12px">
+          </div>
+        </div>
+        <div class="progress"><span>Progresso</span><div class="bar"><div class="fill"></div></div><span>50%</span></div>
+      </div>
+
+      <div class="card" style="grid-column:1/9;">
+        <div class="head">Vistoria (7 Pontos)</div>
+        <div class="body">
+          <div class="grid" style="gap:12px">
+            <!-- repeat cards 1..6 -->
+            
+            <div class="point" style="grid-column:span 6">
+              <div style="display:flex;justify-content:space-between;gap:8px">
+                <div><div class="title">1. Outside / Undercarriage</div><div class="sub">Longarinas visíveis, sem vazamentos</div></div>
+                <div style="display:flex;gap:8px">
+                  <button class="btn btn-sm">Aceitável</button>
+                  <button class="btn btn-sm">Não</button>
+                </div>
+              </div>
+              <div class="row">
+                <div class="photo" style="grid-column:span 4">Foto 1</div>
+                <div class="photo" style="grid-column:span 4">Foto 2</div>
+                <div class="photo" style="grid-column:span 4">Foto 3</div>
+              </div>
+              <textarea class="ta" rows="3" placeholder="Observações"></textarea>
+            </div>
+            
+            <div class="point" style="grid-column:span 6">
+              <div style="display:flex;justify-content:space-between;gap:8px">
+                <div><div class="title">2. Inside / Outside Doors</div><div class="sub">Fechos, dobradiças e borrachas OK</div></div>
+                <div style="display:flex;gap:8px">
+                  <button class="btn btn-sm">Aceitável</button>
+                  <button class="btn btn-sm">Não</button>
+                </div>
+              </div>
+              <div class="row">
+                <div class="photo" style="grid-column:span 4">Foto 1</div>
+                <div class="photo" style="grid-column:span 4">Foto 2</div>
+                <div class="photo" style="grid-column:span 4">Foto 3</div>
+              </div>
+              <textarea class="ta" rows="3" placeholder="Observações"></textarea>
+            </div>
+            
+            <div class="point" style="grid-column:span 6">
+              <div style="display:flex;justify-content:space-between;gap:8px">
+                <div><div class="title">3. Right Side</div><div class="sub">Sem furos, soldas ou placas</div></div>
+                <div style="display:flex;gap:8px">
+                  <button class="btn btn-sm">Aceitável</button>
+                  <button class="btn btn-sm">Não</button>
+                </div>
+              </div>
+              <div class="row">
+                <div class="photo" style="grid-column:span 4">Foto 1</div>
+                <div class="photo" style="grid-column:span 4">Foto 2</div>
+                <div class="photo" style="grid-column:span 4">Foto 3</div>
+              </div>
+              <textarea class="ta" rows="3" placeholder="Observações"></textarea>
+            </div>
+            
+            <div class="point" style="grid-column:span 6">
+              <div style="display:flex;justify-content:space-between;gap:8px">
+                <div><div class="title">4. Left Side</div><div class="sub">Pintura uniforme, sem compartimentos</div></div>
+                <div style="display:flex;gap:8px">
+                  <button class="btn btn-sm">Aceitável</button>
+                  <button class="btn btn-sm">Não</button>
+                </div>
+              </div>
+              <div class="row">
+                <div class="photo" style="grid-column:span 4">Foto 1</div>
+                <div class="photo" style="grid-column:span 4">Foto 2</div>
+                <div class="photo" style="grid-column:span 4">Foto 3</div>
+              </div>
+              <textarea class="ta" rows="3" placeholder="Observações"></textarea>
+            </div>
+            
+            <div class="point" style="grid-column:span 6">
+              <div style="display:flex;justify-content:space-between;gap:8px">
+                <div><div class="title">5. Front Wall</div><div class="sub">Travessas e respiros visíveis</div></div>
+                <div style="display:flex;gap:8px">
+                  <button class="btn btn-sm">Aceitável</button>
+                  <button class="btn btn-sm">Não</button>
+                </div>
+              </div>
+              <div class="row">
+                <div class="photo" style="grid-column:span 4">Foto 1</div>
+                <div class="photo" style="grid-column:span 4">Foto 2</div>
+                <div class="photo" style="grid-column:span 4">Foto 3</div>
+              </div>
+              <textarea class="ta" rows="3" placeholder="Observações"></textarea>
+            </div>
+            
+            <div class="point" style="grid-column:span 6">
+              <div style="display:flex;justify-content:space-between;gap:8px">
+                <div><div class="title">6. Ceiling / Roof</div><div class="sub">Sem luz entrando, sem pontos fracos</div></div>
+                <div style="display:flex;gap:8px">
+                  <button class="btn btn-sm">Aceitável</button>
+                  <button class="btn btn-sm">Não</button>
+                </div>
+              </div>
+              <div class="row">
+                <div class="photo" style="grid-column:span 4">Foto 1</div>
+                <div class="photo" style="grid-column:span 4">Foto 2</div>
+                <div class="photo" style="grid-column:span 4">Foto 3</div>
+              </div>
+              <textarea class="ta" rows="3" placeholder="Observações"></textarea>
+            </div>
+            
+            <!-- card 7 -->
+            <div class="point" style="grid-column:span 12">
+              <div style="display:flex;justify-content:space-between;gap:8px">
+                <div><div class="title">7. Interior Floor</div><div class="sub">Sem tábuas soltas, manchas ou odores</div></div>
+                <div style="display:flex;gap:8px">
+                  <button class="btn btn-sm">Aceitável</button>
+                  <button class="btn btn-sm">Não</button>
+                </div>
+              </div>
+              <div class="row">
+                <div class="photo" style="grid-column:span 4">Foto 1</div>
+                <div class="photo" style="grid-column:span 4">Foto 2</div>
+                <div class="photo" style="grid-column:span 4">Foto 3</div>
+              </div>
+              <textarea class="ta" rows="3" placeholder="Observações"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="grid-column:9/13;">
+        <div class="head">Documentos</div>
+        <div class="body">
+          <div class="grid">
+            <div class="kv" style="grid-column:span 6"><div class="hint">Tipo</div><div>DTA</div></div><div class="kv" style="grid-column:span 6"><div class="hint">Nº Documento</div><div>DTA-123456789</div></div><div class="kv" style="grid-column:span 6"><div class="hint">Armador</div><div>MSC</div></div><div class="kv" style="grid-column:span 6"><div class="hint">BL</div><div>MSCU123456789</div></div><div class="kv" style="grid-column:span 6"><div class="hint">Navio/Viagem</div><div>MCS Aurora / 123N</div></div><div class="kv" style="grid-column:span 6"><div class="hint">Canal</div><div>Verde</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="grid-column:1/9;">
+        <div class="head">Itens a observar</div>
+        <div class="body grid">
+          <label class="check" style="grid-column:span 6"><input type="checkbox"><span>Paredes falsas (som oco)</span></label><label class="check" style="grid-column:span 6"><input type="checkbox"><span>Dimensões internas corretas (CxLxA)</span></label><label class="check" style="grid-column:span 6"><input type="checkbox"><span>Material de colagem incomum</span></label><label class="check" style="grid-column:span 6"><input type="checkbox"><span>Pontos de cor diferentes</span></label><label class="check" style="grid-column:span 6"><input type="checkbox"><span>Parafusos no lugar de rebites</span></label>
+        </div>
+      </div>
+
+      <div class="card" style="grid-column:9/13;">
+        <div class="head">Aprovação</div>
+        <div class="body">
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px">
+            <span class="check" style="background:rgba(16,185,129,.12)">Todos os pontos OK</span>
+            <span class="check" style="background:rgba(244,63,94,.12)">Há itens não conformes</span>
+          </div>
+          <div class="grid">
+            <div class="kv" style="grid-column:span 6"><div class="hint">Inspetor</div><div>&nbsp;</div></div>
+            <div class="kv" style="grid-column:span 6"><div class="hint">Data</div><div>&nbsp;</div></div>
+            <div class="kv" style="grid-column:span 6"><div class="hint">Hora</div><div>&nbsp;</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer" style="grid-column:1/13;margin-top:8px">
+        <div>Rascunho local • v1</div>
+        <div style="display:flex;gap:8px">
+          <button class="btn">Exportar PDF</button>
+          <button class="btn">Imprimir</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</body></html>
