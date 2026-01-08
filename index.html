@@ -1,249 +1,1284 @@
 <!DOCTYPE html>
-<!-- saved from url=(0087)file:///C:/Users/HxTos/Desktop/Port%20Automation/HXtos%20CY/HXtosCY%20Vistoria%207.html -->
-<html lang="pt-br"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!-- saved from url=(0076)file:///C:/Users/HxTos/Downloads/index_VSC_FORMS_STANDARDIZED_ALL%20(1).html -->
+<html lang="pt-BR"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>CY | VSC Multi-Site (Tela Única)</title>
+  <style>
+    :root{
+      --bg:#e9ecef; --card:#fff; --text:#1f2a37; --muted:#6b7280;
+      --line:#d9dde3; --teal:#00a6c8; --teal2:#028eaa;
+      --shadow:0 10px 22px rgba(16,24,40,.12);
+      --r12:12px; --r10:10px;
+      --focus:rgba(0,166,200,.28);
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Montserrat,Segoe UI,system-ui,Arial,sans-serif;background:var(--bg);color:var(--text)}
+    /* Top */
+    .topbar{
+      height:64px; position:sticky; top:0; z-index:5;
+      background:linear-gradient(90deg,var(--teal2),var(--teal));
+      display:flex; align-items:center; padding:0 16px; color:#fff;
+      box-shadow:0 6px 14px rgba(0,0,0,.12);
+    }
+    .iconbtn{
+      width:38px;height:38px;border-radius:10px;border:1px solid rgba(255,255,255,.28);
+      background:rgba(255,255,255,.12); display:grid; place-items:center; cursor:pointer;
+      transition:.15s ease;
+    }
+    .iconbtn:hover{transform:translateY(-1px);background:rgba(255,255,255,.18)}
+    .brand{flex:1;text-align:center;font-weight:900;letter-spacing:.10em;font-size:20px;user-select:none}
+    .wrap{max-width:1400px;margin:0 auto;padding:14px}
+    /* Card */
+    .card{background:var(--card);border-radius:var(--r12);box-shadow:var(--shadow);border:1px solid rgba(0,0,0,.05);overflow:hidden}
+    .cardHeader{padding:16px 18px 10px;border-bottom:1px solid rgba(0,0,0,.06)}
+    .title{margin:0;font-size:26px;font-weight:900;color:var(--teal2)}
+    /* Tabs */
+    .tabs{margin-top:12px;display:flex;gap:10px;flex-wrap:wrap}
+    .tab{
+      border:1px solid rgba(0,0,0,.10);background:#f7fbfc;color:#0e5564;
+      padding:10px 12px;border-radius:999px;cursor:pointer;font-weight:800;font-size:13px;
+      display:flex;align-items:center;gap:8px;transition:.15s ease;user-select:none;
+    }
+    .tab:hover{transform:translateY(-1px)}
+    .tab.active{background:rgba(0,166,200,.16);border-color:rgba(0,166,200,.35);color:#004c5c}
+    .pill{width:10px;height:10px;border-radius:999px;background:var(--teal2);box-shadow:0 0 0 4px rgba(0,166,200,.16)}
+    .content{padding:14px 16px 16px}
+    .twoCol{display:grid;grid-template-columns:1fr;gap:18px}
+    @media (max-width:1060px){.twoCol{grid-template-columns:1fr}}
+    .panel{
+      border:1px solid rgba(0,0,0,.08);border-radius:var(--r10);padding:14px;background:#fff;
+    }
+    .sub{margin:0 0 10px;font-weight:900;color:#0e5564;font-size:16px}
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    @media (max-width:520px){.grid2{grid-template-columns:1fr}}
+    .field{display:flex;flex-direction:column;gap:7px}
+    .label{font-size:12px;color:var(--muted);font-weight:800}
+    input,select{
+      border:1px solid rgba(0,0,0,.14);border-radius:8px;padding:10px 12px;outline:none;
+      background:#f2f2f2;color:#2b2b2b;font-size:13px;transition:.15s ease;
+    }
+    input:focus,select:focus{border-color:rgba(0,166,200,.55);box-shadow:0 0 0 4px var(--focus);background:#fff}
+    .btnrow{display:flex;gap:12px;justify-content:flex-end;align-items:center;margin-top:10px;flex-wrap:wrap}
+    .btn{
+      border:none;padding:10px 14px;border-radius:10px;font-weight:900;cursor:pointer;
+      transition:.15s ease;font-size:13px;min-width:150px;display:inline-flex;gap:10px;align-items:center;justify-content:center;
+    }
+    .btn.light{background:#bfefff;color:#0a6477}
+    .btn.primary{background:var(--teal2);color:#fff}
+    .btn.ghost{background:#f6f7f9;border:1px solid rgba(0,0,0,.10);color:#1c4450}
+    .btn:hover{transform:translateY(-1px);filter:brightness(.98)}
+    .divider{height:1px;background:rgba(0,0,0,.10);margin:12px 0}
+    .hint{margin:0;color:var(--muted);font-weight:700;font-size:12px;line-height:1.35}
+    /* Compass (direção empilhamento) */
+    .configGrid{display:grid;grid-template-columns:230px 1fr 1fr;gap:12px;align-items:start}
+    @media (max-width:920px){.configGrid{grid-template-columns:1fr}}
+    .compassWrap{display:flex;flex-direction:column;gap:10px}
+    .compassLabel{font-weight:900;color:#0e5564;font-size:13px}
+    .compass{
+      width:190px;height:190px;border-radius:999px;border:2px solid rgba(0,0,0,.12);position:relative;
+      background:radial-gradient(circle at 30% 30%,#fff,#f1f6f8);box-shadow:0 10px 18px rgba(0,0,0,.10);
+    }
+    .ring{position:absolute;inset:14px;border-radius:999px;border:1px solid rgba(0,0,0,.14)}
+    .cross{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none}
+    .cross::before,.cross::after{content:"";position:absolute;background:rgba(0,166,200,.65);border-radius:999px}
+    .cross::before{width:2px;height:150px}.cross::after{height:2px;width:150px}
+    .dirbtn{
+      position:absolute;width:34px;height:34px;border-radius:999px;background:#fff;border:1px solid rgba(0,0,0,.12);
+      display:grid;place-items:center;font-weight:900;font-size:11px;color:#0e5564;cursor:pointer;transition:.12s ease;
+    }
+    .dirbtn:hover{transform:translateY(-1px)}
+    .dirbtn.active{background:var(--teal2);color:#fff;box-shadow:0 8px 14px rgba(0,166,200,.25)}
+    .N{top:-10px;left:50%;transform:translateX(-50%)} .NE{top:16px;right:16px}
+    .E{top:50%;right:-10px;transform:translateY(-50%)} .SE{bottom:16px;right:16px}
+    .S{bottom:-10px;left:50%;transform:translateX(-50%)} .SO{bottom:16px;left:16px}
+    .O{top:50%;left:-10px;transform:translateY(-50%)} .NO{top:16px;left:16px}
+    .needle{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none}
+    .needle svg{width:96px;height:96px;opacity:.92;transform-origin:50% 50%}
+    /* Toggle (Row/Tier) */
+    .toggleRow{display:flex;align-items:center;gap:10px;margin-top:4px}
+    .toggle{
+      width:52px;height:28px;border-radius:999px;background:#dde3ea;border:1px solid rgba(0,0,0,.12);
+      position:relative;cursor:pointer;transition:.15s ease;
+    }
+    .toggle::after{
+      content:"";width:22px;height:22px;border-radius:999px;position:absolute;top:2px;left:2px;background:#fff;
+      box-shadow:0 4px 10px rgba(0,0,0,.12);transition:.15s ease;
+    }
+    .toggle.on{background:rgba(0,166,200,.28);border-color:rgba(0,166,200,.35)}
+    .toggle.on::after{left:28px;background:#eaffff}
+    .tag{font-size:12px;font-weight:900;color:#0e5564}
+    /* Visualização (grid) */
+    .vizPanel{border-left:1px solid rgba(0,0,0,.12);padding-left:18px}
+    @media (max-width:1060px){.vizPanel{border-left:none;padding-left:0;border-top:1px solid rgba(0,0,0,.12);padding-top:16px}}
+    .vizHead{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px;flex-wrap:wrap}
+    .vizTitle{margin:0;font-size:14px;font-weight:900;color:#0e5564}
+    .walls{display:flex;gap:8px;align-items:center;flex-wrap:wrap;color:var(--muted);font-size:12px;font-weight:800}
+    .ck{
+      display:flex;gap:6px;align-items:center;background:#f6f7f9;border:1px solid rgba(0,0,0,.10);
+      padding:6px 8px;border-radius:999px;cursor:pointer;user-select:none
+    }
+    .ck input{margin:0;width:16px;height:16px}
+    .yardWrap{display:grid;grid-template-columns:40px 1fr;gap:8px;align-items:start;margin-top:8px}
+    .yAxis{display:flex;flex-direction:column;gap:14px;padding-top:8px;align-items:flex-end;font-weight:900;color:#232a31}
+    .yard{
+      border-radius:12px;padding:10px 10px 6px;background:#fff;border:1px solid rgba(0,0,0,.10);
+      display:inline-block;position:relative;
+    }
+    .yardGrid{display:grid;gap:10px;justify-content:start;align-content:start}
+    .slot{
+      width:40px;height:40px;background:#dcdcdc;border-radius:3px;border:1px solid rgba(0,0,0,.06);
+      cursor:pointer;transition:.12s ease;position:relative;
+    }
+    .slot:hover{transform:translateY(-1px);filter:brightness(.98)}
+    .slot.occ{background:rgba(0,166,200,.28)}
+    .slot.occ::after{content:"";position:absolute;inset:10px;border-radius:2px;border:2px solid rgba(2,142,170,.75)}
+    .xAxis{display:grid;gap:10px;margin-left:40px;margin-top:8px;font-weight:900;color:#232a31}
+    .xAxis span{display:block;width:40px;text-align:center}
+    .yardWallsTop,.yardWallsBottom{position:absolute;left:10px;right:10px;height:10px;display:flex;justify-content:center;align-items:center;pointer-events:none}
+    .yardWallsTop{top:-2px}.yardWallsBottom{bottom:-2px}
+    .yardWallsLeft,.yardWallsRight{position:absolute;top:10px;bottom:10px;width:10px;display:flex;justify-content:center;align-items:center;pointer-events:none}
+    .yardWallsLeft{left:-2px}.yardWallsRight{right:-2px}
+    .wallLine{background:#cfd6dd;border-radius:999px}
+    /* Table */
+    .tableCard{margin-top:14px;background:#fff;border:1px solid rgba(0,0,0,.06);border-radius:var(--r12);box-shadow:var(--shadow);overflow:hidden}
+    .tableHead{padding:16px 16px 10px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+    .tableTitle{margin:0;font-size:24px;font-weight:900;color:var(--teal2)}
+    .exportBtn{
+      border:none;background:var(--teal2);color:#fff;border-radius:12px;padding:12px 16px;font-weight:900;
+      cursor:pointer;display:inline-flex;align-items:center;gap:10px;min-width:260px;justify-content:center;
+      transition:.15s ease;
+    }
+    .exportBtn:hover{filter:brightness(.98);transform:translateY(-1px)}
+    .searchbar{padding:10px 16px 0}
+    .search{
+      width:100%;border-radius:8px;background:#efefef;border:1px solid rgba(0,0,0,.12);
+      padding:11px 12px 11px 38px;outline:none;font-weight:800;
+      background-image:radial-gradient(circle at 14px 50%,rgba(0,0,0,.35) 2px,transparent 3px);
+      background-repeat:no-repeat;background-size:20px 20px;background-position:10px 50%;
+    }
+    table{width:100%;border-collapse:collapse;font-size:13px}
+    th,td{padding:12px 10px;border-bottom:1px solid rgba(0,0,0,.10);text-align:left;white-space:nowrap}
+    th{color:var(--teal2);font-weight:900;font-size:12px}
+    td{color:#2a2a2a;font-weight:800}
+    .actions{display:flex;gap:8px;align-items:center}
+    .smallBtn{border:none;background:var(--teal2);color:#fff;border-radius:7px;padding:8px 10px;font-weight:900;cursor:pointer;font-size:11px}
+    .smallBtn.icon{width:34px;padding:8px 0}
+    .smallBtn.secondary{background:#1aa2bb}.smallBtn.danger{background:#0f7e95}
+    .foot{padding:12px 16px;color:var(--muted);font-weight:800;font-size:12px;display:flex;justify-content:flex-end;gap:10px;flex-wrap:wrap}
+    /* Toast */
+    .toast{
+      position:fixed;bottom:16px;right:16px;background:#0e5564;color:#fff;padding:12px 14px;border-radius:12px;
+      box-shadow:0 14px 28px rgba(0,0,0,.20);opacity:0;transform:translateY(10px);transition:.18s ease;
+      max-width:420px;z-index:20;font-weight:900;font-size:13px
+    }
+    .toast.show{opacity:1;transform:translateY(0)}
+  
+    /* Required + validation */
+    :root{
+      --danger:#c1121f;
+      --dangerBg: rgba(193,18,31,.10);
+      --ok:#1f7a1f;
+      --amber:#a85d00;
+    }
+    .req{color:var(--danger);font-weight:900}
+    .error input,.error select{
+      border-color: var(--danger)!important;
+      background: var(--dangerBg)!important;
+      box-shadow: 0 0 0 4px rgba(193,18,31,.14)!important;
+    }
+    .errmsg{display:none;color:var(--danger);font-weight:900;font-size:12px;line-height:1.2}
+    .error .errmsg{display:block}
 
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>HXtos CY — Vistoria 7 Pontos (Gate Layout • Light)</title>
-<style>
+    /* Gate Decision + chips */
+    .statusBox{
+      border:1px dashed rgba(0,0,0,.18);
+      border-radius:12px;
+      padding:12px;
+      background:#fbfdfe;
+      display:flex;flex-direction:column;gap:8px;
+    }
+    .statusLine{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-weight:900;font-size:13px}
+    .badge{
+      padding:6px 10px;border-radius:999px;font-weight:900;font-size:12px;
+      border:1px solid rgba(0,0,0,.10);
+      background:#f6f7f9;color:#1c4450;
+    }
+    .badge.ok{background:rgba(31,122,31,.10);border-color:rgba(31,122,31,.22);color:var(--ok)}
+    .badge.warn{background:rgba(193,18,31,.08);border-color:rgba(193,18,31,.18);color:var(--danger)}
+    .badge.amber{background:rgba(168,93,0,.10);border-color:rgba(168,93,0,.20);color:var(--amber)}
+    .chipRow{display:flex;gap:8px;flex-wrap:wrap}
+    .chip{
+      display:inline-flex;gap:8px;align-items:center;
+      padding:8px 10px;border-radius:999px;
+      background:#f6f7f9;border:1px solid rgba(0,0,0,.10);
+      font-weight:900;font-size:12px;color:#0e5564;
+      cursor:pointer;user-select:none;transition:.12s ease;
+    }
+    .chip:hover{transform:translateY(-1px)}
+    .chip .dot{width:10px;height:10px;border-radius:999px;background:var(--teal2);box-shadow:0 0 0 4px rgba(0,166,200,.16)}
+    .chip.off{opacity:.55}
+    .chip.off .dot{background:#7b8794;box-shadow:none}
 
-:root{
-  --bg:#f6f8fb;--panel:#ffffff;--panel2:#f5f7fa;--border:#d6dbe0;
-  --muted:#64748b;--text:#1f2937;--brand:#0ea5e9;--accent:#10b981;
+  
+/* Hide slot letter references (A B C...) in Sites & Layout Configurações */
+#tab1 .xAxis, 
+#tab1 [id^="xAxis"] {
+  display: none !important;
 }
-*{box-sizing:border-box}
-html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font:14px/1.4 system-ui,Segoe UI,Roboto,Helvetica,Arial}
-.container{max-width:1220px;margin:0 auto;padding:16px}
-.topbar{position:sticky;top:0;z-index:10;background:rgba(245,247,250,.9);backdrop-filter:saturate(1.1) blur(4px);border-bottom:1px solid var(--border)}
-.topwrap{display:flex;align-items:center;justify-content:space-between;padding:12px 20px;max-width:1220px;margin:0 auto}
-.brand{display:flex;gap:12px;align-items:center}
-.brand-badge{width:36px;height:36px;border-radius:10px;background:rgba(14,165,233,.12);outline:1px solid rgba(14,165,233,.4);display:grid;place-items:center;color:#0369a1}
-.h1{font-weight:700;font-size:18px}
-.hint{color:var(--muted);font-size:12px;margin-top:2px}
-.btn{border:1px solid var(--border);background:var(--panel);color:var(--text);padding:8px 12px;border-radius:10px;font-size:13px}
-.btn.primary{background:#e0f2fe;border-color:#bae6fd;color:#075985}
-.btn:hover{background:#f8fafc}
-.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
-.card{border:1px solid var(--border);background:var(--panel);border-radius:14px}
-.card > .head{border-bottom:1px solid var(--border);padding:10px 12px;font-weight:600;color:#0369a1}
-.card > .body{padding:12px}
-.badge{display:inline-block;background:#f1f5f9;border:1px solid var(--border);padding:4px 8px;border-radius:6px}
-.progress{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:12px;margin-top:8px}
-.bar{height:8px;width:190px;background:#e2e8f0;border-radius:999px;overflow:hidden}
-.fill{height:100%;width:50%;background:var(--accent)}
-.point{border:1px solid var(--border);background:#f8fafc;border-radius:12px;padding:12px}
-.point .title{font-size:14px;font-weight:600}
-.point .sub{font-size:12px;color:var(--muted)}
-.actions{display:flex;gap:8px}
-.btn-sm{font-size:12px;padding:6px 8px;border-radius:8px}
-.row{display:grid;grid-template-columns:repeat(12,1fr);gap:8px;margin-top:8px}
-.photo{display:grid;place-items:center;border:1px solid var(--border);background:var(--panel);border-radius:8px;height:32px;color:var(--muted)}
-.ta{width:100%;background:var(--panel);border:1px solid var(--border);border-radius:8px;color:var(--text);padding:8px;font-size:12px}
-.check{display:flex;align-items:center;gap:8px;border:1px solid var(--border);background:#f8fafc;border-radius:8px;padding:8px}
-.kv{border:1px solid var(--border);background:#f8fafc;border-radius:10px;padding:8px}
-.footer{display:flex;align-items:center;justify-content:space-between;color:var(--muted);font-size:12px}
-@media print{
-  @page { size: A4 landscape; margin: 8mm; }
-  body{print-color-adjust:exact;-webkit-print-color-adjust:exact;background:var(--bg)}
-  .topbar{position:static}
+
+
+/* Force removal of yard visual elements in Sites & Layout */
+#tab1 .yardWrap,
+#tab1 .yard,
+#tab1 .yardGrid,
+#tab1 .slot,
+#tab1 .xAxis,
+#tab1 .yAxis,
+#tab1 .vizTitle,
+#tab1 .walls {
+  display: none !important;
+}
+
+
+/* Remove visual occupancy strip in Inventário & Reconciliação */
+#tab2 .xAxis,
+#tab2 .yardWrap,
+#tab2 .yard,
+#tab2 .yardGrid,
+#tab2 .slot,
+#tab2 .yAxis,
+#tab2 .hint {
+  display: none !important;
+}
+
+
+/* === HXtos Form Design System (GLOBAL) === */
+.formRow {
+  display: grid;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.formRow.full { grid-template-columns: 1fr; }
+.formRow.two { grid-template-columns: 1fr 1fr; }
+.formRow.three { grid-template-columns: 2fr 1fr 1fr; }
+.formRow.four { grid-template-columns: repeat(4, 1fr); }
+
+.field input,
+.field select {
+  height: 34px;
+  font-size: 12px;
+  padding: 6px 8px;
 }
 
 </style>
 </head>
+
 <body>
   <div class="topbar">
-    <div class="topwrap">
-      <div class="brand">
-        <div class="brand-badge">✓</div>
-        <div>
-          <div class="h1">HXtos CY — Vistoria 7 Pontos</div>
-          <div class="hint">Layout inspirado no Controle de Gate (Light)</div>
-        </div>
-      </div>
-      <div class="actions">
-        <button class="btn">Salvar</button>
-        <button class="btn primary">Enviar</button>
-        <button class="btn">Imprimir</button>
-      </div>
+    <button class="iconbtn" title="Menu" aria-label="Menu">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+        <path d="M4 6h16M4 12h16M4 18h12" stroke="white" stroke-width="2.4" stroke-linecap="round"></path>
+      </svg>
+    </button>
+    <div class="brand">CY</div>
+    <div style="display:flex;gap:10px">
+      <button class="iconbtn" title="Dica" aria-label="Dica" onclick="toast(&#39;Use as abas para alternar entre os 3 blocos. O grid simula ocupação: clique nos slots.&#39;);">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+          <path d="M12 18h.01M10 10a2 2 0 1 1 3 1.7c-.7.5-1 1-1 2.3v.5" stroke="white" stroke-width="2.4" stroke-linecap="round"></path>
+          <path d="M12 22C6.5 22 2 17.5 2 12S6.5 2 12 2s10 4.5 10 10-4.5 10-10 10Z" stroke="white" stroke-width="2.2"></path>
+        </svg>
+      </button>
     </div>
   </div>
 
-  <div class="container">
-    <div class="grid">
-      <div class="card" style="grid-column:1/13;padding:12px;">
-        <div class="grid" style="gap:8px;align-items:center">
-          <div style="grid-column:span 3"><span class="badge">MSCU1234567</span> <span class="hint">Contêiner (OCR)</span></div>
-          <div style="grid-column:span 2"><span class="badge">22G1</span> <span class="hint">ISO</span></div>
-          <div style="grid-column:span 2"><span class="badge">ABC1D23</span> <span class="hint">Placa</span></div>
-          <div style="grid-column:span 3"><span class="badge">DTA-123456789</span> <span class="hint">Documento</span></div>
-          <div style="grid-column:span 2;display:flex;align-items:center;gap:8px">
-            <input placeholder="Buscar container/placa" style="width:100%;border:1px solid var(--border);background:var(--panel);color:var(--text);border-radius:8px;padding:6px 8px;font-size:12px">
-          </div>
-        </div>
-        <div class="progress"><span>Progresso</span><div class="bar"><div class="fill"></div></div><span>50%</span></div>
-      </div>
+  <div class="wrap">
+    <div class="card">
+      <div class="cardHeader">
+        <h1 class="title">VSC Multi-Site</h1>
 
-      <div class="card" style="grid-column:1/9;">
-        <div class="head">Vistoria (7 Pontos)</div>
-        <div class="body">
-          <div class="grid" style="gap:12px">
-            <!-- repeat cards 1..6 -->
-            
-            <div class="point" style="grid-column:span 6">
-              <div style="display:flex;justify-content:space-between;gap:8px">
-                <div><div class="title">1. Outside / Undercarriage</div><div class="sub">Longarinas visíveis, sem vazamentos</div></div>
-                <div style="display:flex;gap:8px">
-                  <button class="btn btn-sm">Aceitável</button>
-                  <button class="btn btn-sm">Não</button>
-                </div>
-              </div>
-              <div class="row">
-                <div class="photo" style="grid-column:span 4">Foto 1</div>
-                <div class="photo" style="grid-column:span 4">Foto 2</div>
-                <div class="photo" style="grid-column:span 4">Foto 3</div>
-              </div>
-              <textarea class="ta" rows="3" placeholder="Observações"></textarea>
-            </div>
-            
-            <div class="point" style="grid-column:span 6">
-              <div style="display:flex;justify-content:space-between;gap:8px">
-                <div><div class="title">2. Inside / Outside Doors</div><div class="sub">Fechos, dobradiças e borrachas OK</div></div>
-                <div style="display:flex;gap:8px">
-                  <button class="btn btn-sm">Aceitável</button>
-                  <button class="btn btn-sm">Não</button>
-                </div>
-              </div>
-              <div class="row">
-                <div class="photo" style="grid-column:span 4">Foto 1</div>
-                <div class="photo" style="grid-column:span 4">Foto 2</div>
-                <div class="photo" style="grid-column:span 4">Foto 3</div>
-              </div>
-              <textarea class="ta" rows="3" placeholder="Observações"></textarea>
-            </div>
-            
-            <div class="point" style="grid-column:span 6">
-              <div style="display:flex;justify-content:space-between;gap:8px">
-                <div><div class="title">3. Right Side</div><div class="sub">Sem furos, soldas ou placas</div></div>
-                <div style="display:flex;gap:8px">
-                  <button class="btn btn-sm">Aceitável</button>
-                  <button class="btn btn-sm">Não</button>
-                </div>
-              </div>
-              <div class="row">
-                <div class="photo" style="grid-column:span 4">Foto 1</div>
-                <div class="photo" style="grid-column:span 4">Foto 2</div>
-                <div class="photo" style="grid-column:span 4">Foto 3</div>
-              </div>
-              <textarea class="ta" rows="3" placeholder="Observações"></textarea>
-            </div>
-            
-            <div class="point" style="grid-column:span 6">
-              <div style="display:flex;justify-content:space-between;gap:8px">
-                <div><div class="title">4. Left Side</div><div class="sub">Pintura uniforme, sem compartimentos</div></div>
-                <div style="display:flex;gap:8px">
-                  <button class="btn btn-sm">Aceitável</button>
-                  <button class="btn btn-sm">Não</button>
-                </div>
-              </div>
-              <div class="row">
-                <div class="photo" style="grid-column:span 4">Foto 1</div>
-                <div class="photo" style="grid-column:span 4">Foto 2</div>
-                <div class="photo" style="grid-column:span 4">Foto 3</div>
-              </div>
-              <textarea class="ta" rows="3" placeholder="Observações"></textarea>
-            </div>
-            
-            <div class="point" style="grid-column:span 6">
-              <div style="display:flex;justify-content:space-between;gap:8px">
-                <div><div class="title">5. Front Wall</div><div class="sub">Travessas e respiros visíveis</div></div>
-                <div style="display:flex;gap:8px">
-                  <button class="btn btn-sm">Aceitável</button>
-                  <button class="btn btn-sm">Não</button>
-                </div>
-              </div>
-              <div class="row">
-                <div class="photo" style="grid-column:span 4">Foto 1</div>
-                <div class="photo" style="grid-column:span 4">Foto 2</div>
-                <div class="photo" style="grid-column:span 4">Foto 3</div>
-              </div>
-              <textarea class="ta" rows="3" placeholder="Observações"></textarea>
-            </div>
-            
-            <div class="point" style="grid-column:span 6">
-              <div style="display:flex;justify-content:space-between;gap:8px">
-                <div><div class="title">6. Ceiling / Roof</div><div class="sub">Sem luz entrando, sem pontos fracos</div></div>
-                <div style="display:flex;gap:8px">
-                  <button class="btn btn-sm">Aceitável</button>
-                  <button class="btn btn-sm">Não</button>
-                </div>
-              </div>
-              <div class="row">
-                <div class="photo" style="grid-column:span 4">Foto 1</div>
-                <div class="photo" style="grid-column:span 4">Foto 2</div>
-                <div class="photo" style="grid-column:span 4">Foto 3</div>
-              </div>
-              <textarea class="ta" rows="3" placeholder="Observações"></textarea>
-            </div>
-            
-            <!-- card 7 -->
-            <div class="point" style="grid-column:span 12">
-              <div style="display:flex;justify-content:space-between;gap:8px">
-                <div><div class="title">7. Interior Floor</div><div class="sub">Sem tábuas soltas, manchas ou odores</div></div>
-                <div style="display:flex;gap:8px">
-                  <button class="btn btn-sm">Aceitável</button>
-                  <button class="btn btn-sm">Não</button>
-                </div>
-              </div>
-              <div class="row">
-                <div class="photo" style="grid-column:span 4">Foto 1</div>
-                <div class="photo" style="grid-column:span 4">Foto 2</div>
-                <div class="photo" style="grid-column:span 4">Foto 3</div>
-              </div>
-              <textarea class="ta" rows="3" placeholder="Observações"></textarea>
-            </div>
-          </div>
+        <div class="tabs" role="tablist" aria-label="VSC Tabs">
+          <button class="tab" data-tab="tab1" role="tab" aria-selected="false"><span class="pill"></span> Sites &amp; Layout</button>
+          <button class="tab" data-tab="tab2" role="tab" aria-selected="false"><span class="pill"></span> Inventário &amp; Reconciliação</button>
+          <button class="tab" data-tab="tab3" role="tab" aria-selected="false"><span class="pill"></span> Transfer Orders</button>
+          <button class="tab active" data-tab="tab4" role="tab" aria-selected="true"><span class="pill"></span> Gate Control</button>
         </div>
       </div>
 
-      <div class="card" style="grid-column:9/13;">
-        <div class="head">Documentos</div>
-        <div class="body">
-          <div class="grid">
-            <div class="kv" style="grid-column:span 6"><div class="hint">Tipo</div><div>DTA</div></div><div class="kv" style="grid-column:span 6"><div class="hint">Nº Documento</div><div>DTA-123456789</div></div><div class="kv" style="grid-column:span 6"><div class="hint">Armador</div><div>MSC</div></div><div class="kv" style="grid-column:span 6"><div class="hint">BL</div><div>MSCU123456789</div></div><div class="kv" style="grid-column:span 6"><div class="hint">Navio/Viagem</div><div>MCS Aurora / 123N</div></div><div class="kv" style="grid-column:span 6"><div class="hint">Canal</div><div>Verde</div></div>
-          </div>
-        </div>
-      </div>
+      <div class="content">
 
-      <div class="card" style="grid-column:1/9;">
-        <div class="head">Itens a observar</div>
-        <div class="body grid">
-          <label class="check" style="grid-column:span 6"><input type="checkbox"><span>Paredes falsas (som oco)</span></label><label class="check" style="grid-column:span 6"><input type="checkbox"><span>Dimensões internas corretas (CxLxA)</span></label><label class="check" style="grid-column:span 6"><input type="checkbox"><span>Material de colagem incomum</span></label><label class="check" style="grid-column:span 6"><input type="checkbox"><span>Pontos de cor diferentes</span></label><label class="check" style="grid-column:span 6"><input type="checkbox"><span>Parafusos no lugar de rebites</span></label>
-        </div>
-      </div>
+        <!-- TAB 1: Sites & Layout -->
+        <div id="tab1" class="tabPane" style="display: none;">
+          <div class="twoCol">
+            <div class="panel">
+              <p class="sub">Cadastro base</p>
 
-      <div class="card" style="grid-column:9/13;">
-        <div class="head">Aprovação</div>
-        <div class="body">
-          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px">
-            <span class="check" style="background:rgba(16,185,129,.12)">Todos os pontos OK</span>
-            <span class="check" style="background:rgba(244,63,94,.12)">Há itens não conformes</span>
-          </div>
-          <div class="grid">
-            <div class="kv" style="grid-column:span 6"><div class="hint">Inspetor</div><div>&nbsp;</div></div>
-            <div class="kv" style="grid-column:span 6"><div class="hint">Data</div><div>&nbsp;</div></div>
-            <div class="kv" style="grid-column:span 6"><div class="hint">Hora</div><div>&nbsp;</div></div>
-          </div>
-        </div>
-      </div>
+              <div class="formRow two">
+<div class="field"><div class="label">Nome do Site Externo
+</div><input id="siteName" value="Site Externo A" placeholder="Ex.: Overflow Retroárea A"></div>
+                <div class="field"><div class="label">Tipo</div>
+                  <select id="siteType">
+                    <option>Overflow</option><option>Depot</option><option>Retroárea</option><option>IMDG</option><option>Reefer</option><option>Outros</option>
+                  </select>
+                </div>
 
-      <div class="footer" style="grid-column:1/13;margin-top:8px">
-        <div>Rascunho local • v1</div>
-        <div style="display:flex;gap:8px">
-          <button class="btn">Exportar PDF</button>
-          <button class="btn">Imprimir</button>
-        </div>
-      </div>
-    </div>
+                <div class="field"><div class="label">Status</div><select id="siteStatus"><option>Ativo</option><option>Inativo</option></select></div>
+                <div class="field"><div class="label">Operador Responsável</div><input id="siteOperator" value="Operação Própria" placeholder="Ex.: Terceiro / Próprio"></div>
+
+                <div class="field"><div class="label">Identificação da quadra</div><input id="quadraName" value="Quadra 1" placeholder="Ex.: Q1"></div>
+                <div class="field"><div class="label">Quantidade Bay</div>
+                  <select id="bayQty">
+                    <option value="7">7</option><option value="10">10</option><option value="12">12</option><option value="16">16</option><option value="24">24</option>
+                  </select>
+                </div>
+
+                <div class="field"><div class="label">Quantidade Row</div>
+                  <select id="rowQty">
+                    <option value="13">13</option><option value="10">10</option><option value="12">12</option><option value="20">20</option><option value="28">28</option>
+                  </select>
+                </div>
+                <div class="field"><div class="label">Quantidade Tier</div>
+                  <select id="tierQty">
+                    <option value="5">5</option><option value="4">4</option><option value="6">6</option><option value="7">7</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="btnrow">
+                <button class="btn light" onclick="clearTab1()">Limpar</button>
+                <button class="btn primary" onclick="generateLayout()">Gerar Visualização</button>
+              </div>
+
+              <div class="divider"></div>
+
+              </div></div>
+            </div>
+
+            </div></div>
+
+                  <p class="hint" style="margin-top:8px">
+                </p></div>
+              
+            
+          
+        
+
+        <!-- TAB 2: Inventário & Reconciliação -->
+        <div id="tab2" class="tabPane" style="display: none;">
+          <div class="twoCol">
+            <div class="panel">
+              <p class="sub">Inventário (filtros)</p>
+
+              <div class="formRow two">
+<div class="field"><div class="label">Site
+</div>
+                  <select id="invSite">
+                    <option>Site Externo A</option><option>Site Externo B</option>
+                  </select>
+                </div>
+                <div class="field"><div class="label">Quadra</div>
+                  <select id="invQuadra"><option>Quadra 1</option><option>Quadra 2</option></select>
+                </div>
+                <div class="field"><div class="label">Tipo</div>
+                  <select id="invTipo"><option>Todos</option><option>Empty</option><option>Full</option><option>Reefer</option><option>IMDG</option><option>OOG</option></select>
+                </div>
+                <div class="field"><div class="label">Dwell time</div>
+                  <select id="invDwell"><option>Qualquer</option><option>&gt; 5 dias</option><option>&gt; 10 dias</option><option>&gt; 20 dias</option></select>
+                </div>
+              </div>
+
+              <div class="btnrow" style="justify-content:flex-start">
+                <button class="btn primary" onclick="quickCheck(&#39;in&#39;)">Check-in</button>
+                <button class="btn ghost" onclick="quickCheck(&#39;out&#39;)">Check-out</button>
+                <button class="btn light" onclick="toast(&#39;Mover interno (demo): ajuste via tabela / regra de negócio.&#39;);">Mover</button>
+              </div>
+
+              <div class="divider"></div>
+
+              <p class="sub">Reconciliação (auditoria)</p>
+
+              <div class="formRow two">
+<div class="field"><div class="label">Modo
+</div>
+                  <select id="audMode"><option>Por Quadra</option><option>Por faixa (Row/Bay)</option><option>Por lista (scan)</option></select>
+                </div>
+                <div class="field"><div class="label">Critério</div>
+                  <select id="audCrit"><option>Somente divergências</option><option>Somente IMDG</option><option>Somente Reefer</option><option>Dwell &gt; 20 dias</option></select>
+                </div>
+              </div>
+
+              <div class="btnrow">
+                <button class="btn primary" onclick="seedAudit()">Iniciar Auditoria</button>
+                <button class="btn light" onclick="exportActiveTable()">Exportar Relatório</button>
+              </div>
+            </div>
+
+            </div></div>
+                  
+                
+              
+            
+          
+        
+
+        <!-- TAB 3: Transfer Orders -->
+        <div id="tab3" class="tabPane" style="display: none;">
+          <div class="twoCol">
+            <div class="panel">
+              <p class="sub">Cadastro base (Transfer Order)</p>
+
+              <div class="formRow two">
+<div class="field"><div class="label">Origem
+</div>
+
+<!-- BEGIN JL PATCH – Transfer Order extra fields -->
+<div class="formRow three">
+
+  <div class="field">
+    <div class="label">Numeração dos Contêineres</div>
+    <input id="toContainers" placeholder="MSCU1234567, CMAU7654321">
   </div>
+
+  <div class="field">
+    <div class="label">Dimensão</div>
+    <select id="toDimension">
+      <option value="">Selecione...</option>
+      <option>20'</option>
+      <option>40'</option>
+      <option>40'HC</option>
+    </select>
+  </div>
+
+  <div class="field">
+    <div class="label">Cargo Purpose</div>
+    <select id="toCargo">
+      <option value="">Selecione...</option>
+      <option>Dry</option>
+      <option>Reefer</option>
+      <option>Open Top</option>
+      <option>Flat Rack</option>
+    </select>
+  </div>
+
+</div>
+<!-- END JL PATCH -->
+
+                  <select id="toOrig"><option>CY Principal</option><option>Site Externo A</option><option>Site Externo B</option></select>
+                </div>
+                <div class="field"><div class="label">Destino</div>
+                  <select id="toDest"><option>Site Externo A</option><option>Site Externo B</option><option>CY Principal</option></select>
+                </div>
+                <div class="field"><div class="label">Janela (início)</div><input id="toStart" type="datetime-local"></div>
+                <div class="field"><div class="label">Janela (fim)</div><input id="toEnd" type="datetime-local"></div>
+                <div class="field"><div class="label">Prioridade</div><select id="toPrio"><option>Normal</option><option>Alta</option></select></div>
+                <div class="field"><div class="label">Motivo</div><select id="toMot"><option>Overflow</option><option>Esvaziamento</option><option>Segregação</option><option>Inspeção</option><option>Outros</option></select></div>
+              </div>
+
+              <div class="btnrow">
+                <button class="btn light" onclick="toast(&#39;Filtros limpos (demo).&#39;)">Limpar</button>
+                <button class="btn primary" onclick="planTO()">Gerar Lista Planejada</button>
+              </div>
+
+              <div class="divider"></div>
+
+              </div></div></div>
+
+
+        <!-- TAB 4: Gate Control -->
+        <div id="tab4" class="tabPane" style="display: block;">
+          <div class="twoCol">
+            <div class="panel">
+              <p class="sub">Gate In / Gate Out (todos obrigatórios)</p>
+
+              <div class="formRow two">
+<div class="field" id="g_action">
+                  <div class="label">Ação <span class="req">*</span>
+</div>
+                  <select id="gAction">
+                    <option value="">Selecione...</option>
+                    <option value="Gate In">Gate In</option>
+                    <option value="Gate Out">Gate Out</option>
+                  </select>
+                  <div class="errmsg">Obrigatório.</div>
+                </div>
+
+                <div class="field" id="g_site">
+                  <div class="label">Site <span class="req">*</span></div>
+                  <select id="gSite">
+                    <option value="">Selecione...</option>
+                    <option>CY Principal</option>
+                    <option>Site Externo A</option>
+                    <option>Site Externo B</option>
+                  </select>
+                  <div class="errmsg">Obrigatório.</div>
+                </div>
+
+                <div class="field" id="g_lane">
+                  <div class="label">Gate Lane <span class="req">*</span></div>
+                  <select id="gLane">
+                    <option value="">Selecione...</option>
+                    <option>Lane 01</option><option>Lane 02</option><option>Lane 03</option><option>Lane 04</option>
+                  </select>
+                  <div class="errmsg">Obrigatório.</div>
+                </div>
+
+                <div class="field error" id="g_appt">
+                  <div class="label">Appointment / Agendamento <span class="req">*</span></div>
+                  <input id="gAppt" placeholder="Ex.: APT-2026-000123">
+                  <div class="errmsg">Obrigatório.</div>
+                </div>
+
+                <div class="field" id="g_truck">
+                  <div class="label">Placa do Caminhão <span class="req">*</span></div>
+                  <input id="gTruck" placeholder="Ex.: ABC1D23">
+                  <div class="errmsg">Obrigatório.</div>
+                </div>
+
+                <div class="field" id="g_driver">
+                  <div class="label">Documento do Motorista <span class="req">*</span></div>
+                  <input id="gDriver" placeholder="Ex.: CPF / CNH">
+                  <div class="errmsg">Obrigatório.</div>
+                </div>
+
+                <div class="field" id="g_cntr">
+                  <div class="label">Container <span class="req">*</span></div>
+                  <input id="gCntr" placeholder="Ex.: MSCU1234567">
+                  <div class="errmsg">Obrigatório.</div>
+                </div>
+
+                <div class="field" id="g_iso">
+                  <div class="label">ISO Size/Type <span class="req">*</span></div>
+                  <select id="gIso">
+                    <option value="">Selecione...</option>
+                    <option>20GP</option><option>40GP</option><option>40HC</option><option>45HC</option>
+                    <option>20RF</option><option>40RF</option><option>20OT</option><option>40OT</option>
+                  </select>
+                  <div class="errmsg">Obrigatório.</div>
+                </div>
+
+                <div class="field" id="g_fullEmpty">
+                  <div class="label">Empty/Full <span class="req">*</span></div>
+                  <select id="gFullEmpty">
+                    <option value="">Selecione...</option>
+                    <option>Empty</option><option>Full</option>
+                  </select>
+                  <div class="errmsg">Obrigatório.</div>
+                </div>
+
+                <div class="field" id="g_seal">
+                  <div class="label">Lacre <span class="req">*</span></div>
+                  <input id="gSeal" placeholder="Ex.: SEAL987654">
+                  <div class="errmsg">Obrigatório.</div>
+                </div>
+
+                <div class="field" id="g_docref">
+                  <div class="label">Referência (CE/BL/DUE/TO) <span class="req">*</span></div>
+                  <input id="gDocref" placeholder="Ex.: CE... / BL... / DUE... / TO...">
+                  <div class="errmsg">Obrigatório.</div>
+                </div>
+
+                <div class="field" id="g_ts">
+                  <div class="label">Timestamp <span class="req">*</span></div>
+                  <input id="gTs" readonly="">
+                  <div class="errmsg">Obrigatório.</div>
+                </div>
+              </div>
+
+              <div class="divider"></div>
+
+              <p class="sub">Evidências (simulação)</p>
+              <div class="chipRow">
+                <div class="chip" id="c_ocr" onclick="toggleChip(&#39;c_ocr&#39;)"><span class="dot"></span> OCR CNTR</div>
+                <div class="chip" id="c_plate" onclick="toggleChip(&#39;c_plate&#39;)"><span class="dot"></span> OCR Placa</div>
+                <div class="chip" id="c_seal" onclick="toggleChip(&#39;c_seal&#39;)"><span class="dot"></span> Seal Check</div>
+                <div class="chip" id="c_photo" onclick="toggleChip(&#39;c_photo&#39;)"><span class="dot"></span> Foto/Imagens</div>
+                <div class="chip" id="c_damage" onclick="toggleChip(&#39;c_damage&#39;)"><span class="dot"></span> Damage Snapshot</div>
+              </div>
+
+              <div class="btnrow">
+                <button class="btn light" onclick="gateClear()">Limpar</button>
+                <button class="btn ghost" onclick="gateValidateOnly()">Validar</button>
+                <button class="btn primary" onclick="gateRegister()">Registrar Evento</button>
+              </div>
+
+              <p class="hint">Gate liberado quando: validação OK + (OCR CNTR + OCR Placa + Seal Check) ligados.</p>
+            </div>
+
+            </div></div>
+
+      
+    
+
+    <!-- LISTA (tabela compartilhada, muda conforme aba) -->
+    <div class="tableCard">
+      <div class="tableHead">
+        <h2 class="tableTitle" id="listTitle">Gate Event Log</h2>
+        <button class="exportBtn" onclick="exportActiveTable()">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M12 3v10m0 0 4-4m-4 4-4-4M4 17v3h16v-3" stroke="white" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+          Exportar Excel (CSV)
+        </button>
+      </div>
+
+      <div class="searchbar">
+        <input class="search" id="searchInput" placeholder="Buscar..." oninput="filterTable()">
+      </div>
+
+      <div style="overflow:auto;">
+        <!-- Layout -->
+        <table id="layoutTable" style="display: none;">
+          <thead>
+            <tr>
+              <th>Site</th><th>Quadra</th><th>Bays</th><th>Rows</th><th>Tiers</th>
+              <th>Direção</th><th>Muro</th><th>Empilhar a partir de</th><th>Capacidade Máx</th><th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="layoutTbody"><tr>
+          <td>Site Externo A</td><td>Quadra 1</td><td>7</td><td>13</td><td>5</td>
+          <td>Norte</td><td>Sim</td><td>Row</td><td>1.440 (X tiers)</td>
+          <td>
+            <div class="actions">
+              <button class="smallBtn" onclick="viewRow(&#39;layout&#39;,0)">VER</button>
+              <button class="smallBtn icon secondary" title="Editar" onclick="toast(&#39;Editar (demo): use o formulário e “Cadastrar”.&#39;)">✎</button>
+              <button class="smallBtn icon danger" title="Excluir" onclick="deleteRow(&#39;layout&#39;,0)">🗑</button>
+            </div>
+          </td></tr><tr>
+          <td>Site Externo A</td><td>Quadra 2</td><td>10</td><td>10</td><td>6</td>
+          <td>Sudoeste</td><td>Não</td><td>Row</td><td>3.840 (X tiers)</td>
+          <td>
+            <div class="actions">
+              <button class="smallBtn" onclick="viewRow(&#39;layout&#39;,1)">VER</button>
+              <button class="smallBtn icon secondary" title="Editar" onclick="toast(&#39;Editar (demo): use o formulário e “Cadastrar”.&#39;)">✎</button>
+              <button class="smallBtn icon danger" title="Excluir" onclick="deleteRow(&#39;layout&#39;,1)">🗑</button>
+            </div>
+          </td></tr><tr>
+          <td>Site Externo B</td><td>Quadra 1</td><td>12</td><td>12</td><td>4</td>
+          <td>Leste</td><td>Sim</td><td>Tier</td><td>1.792 (X tiers)</td>
+          <td>
+            <div class="actions">
+              <button class="smallBtn" onclick="viewRow(&#39;layout&#39;,2)">VER</button>
+              <button class="smallBtn icon secondary" title="Editar" onclick="toast(&#39;Editar (demo): use o formulário e “Cadastrar”.&#39;)">✎</button>
+              <button class="smallBtn icon danger" title="Excluir" onclick="deleteRow(&#39;layout&#39;,2)">🗑</button>
+            </div>
+          </td></tr></tbody>
+        </table>
+
+        <!-- Inventário -->
+        <table id="inventoryTable" style="display: none;">
+          <thead>
+            <tr>
+              <th>Unidade</th><th>Tipo</th><th>Site</th><th>Quadra</th><th>Posição</th><th>Status</th><th>Hold</th><th>Último evento</th><th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="invTbody"><tr>
+          <td>MSCU1234567</td><td>Empty</td><td>Site Externo A</td><td>Quadra 1</td><td>B03-R07-T1</td>
+          <td>Presente</td><td>—</td><td>Check-in</td>
+          <td><div class="actions">
+            <button class="smallBtn" onclick="viewRow(&#39;inv&#39;,0)">VER</button>
+            <button class="smallBtn icon secondary" title="Ajustar" onclick="toast(&#39;Ajuste por auditoria (demo).&#39;)">⚙</button>
+          </div></td></tr><tr>
+          <td>CMAU7654321</td><td>Full</td><td>Site Externo A</td><td>Quadra 2</td><td>B05-R02-T1</td>
+          <td>Presente</td><td>—</td><td>Move interno</td>
+          <td><div class="actions">
+            <button class="smallBtn" onclick="viewRow(&#39;inv&#39;,1)">VER</button>
+            <button class="smallBtn icon secondary" title="Ajustar" onclick="toast(&#39;Ajuste por auditoria (demo).&#39;)">⚙</button>
+          </div></td></tr><tr>
+          <td>TGHU2468135</td><td>Reefer</td><td>Site Externo B</td><td>Quadra 1</td><td>B02-R09-T1</td>
+          <td>Presente</td><td>Temp</td><td>Check-in</td>
+          <td><div class="actions">
+            <button class="smallBtn" onclick="viewRow(&#39;inv&#39;,2)">VER</button>
+            <button class="smallBtn icon secondary" title="Ajustar" onclick="toast(&#39;Ajuste por auditoria (demo).&#39;)">⚙</button>
+          </div></td></tr></tbody>
+        </table>
+
+        <!-- TO -->
+        <table id="toTable" style="display: none;">
+          <thead>
+            <tr>
+              <th>TO</th><th>Origem</th><th>Destino</th><th>Contêineres</th><th>Dimensão</th><th>Cargo</th><th>Qtde</th><th>Status</th><th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="toTbody"><tr>
+          <td>TO-00017</td><td>CY Principal</td><td>Site Externo A</td><td>18</td><td>44%</td><td>Em Execução</td><td>1</td>
+          <td><div class="actions">
+            <button class="smallBtn" onclick="viewRow(&#39;to&#39;,0)">VER</button>
+            <button class="smallBtn icon secondary" title="Exportar" onclick="exportActiveTable()">⬇</button>
+          </div></td></tr><tr>
+          <td>TO-00018</td><td>Site Externo A</td><td>CY Principal</td><td>12</td><td>0%</td><td>Aprovada</td><td>0</td>
+          <td><div class="actions">
+            <button class="smallBtn" onclick="viewRow(&#39;to&#39;,1)">VER</button>
+            <button class="smallBtn icon secondary" title="Exportar" onclick="exportActiveTable()">⬇</button>
+          </div></td></tr></tbody>
+        </table>
+
+
+        <!-- Gate -->
+        <table id="gateTable" style="display: table;">
+          <thead>
+            <tr>
+              <th>Timestamp</th><th>Ação</th><th>Site</th><th>Lane</th><th>Appointment</th>
+              <th>Placa</th><th>Motorista</th><th>CNTR</th><th>ISO</th><th>Empty/Full</th><th>Seal</th><th>Ref</th>
+              <th>Validação</th><th>Evidências</th><th>Decisão</th><th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="gateTbody"><tr>
+          <td>2026-01-04 20:10:12</td><td>Gate In</td><td>Site Externo A</td><td>Lane 01</td><td>APT-2026-000123</td>
+          <td>ABC1D23</td><td>000.000.000-00</td><td>MSCU1234567</td><td>40HC</td><td>Empty</td><td>SEAL987654</td><td>TO-00017</td>
+          <td>OK</td><td>Completo</td><td>Liberado</td>
+          <td>
+            <div class="actions">
+              <button class="smallBtn" onclick="toast(&#39;VER: MSCU1234567 • Gate In (2026-01-04 20:10:12)&#39;)">VER</button>
+              <button class="smallBtn icon danger" title="Excluir" onclick="deleteGate(0)">🗑</button>
+            </div>
+          </td></tr></tbody>
+        </table>
+
+      </div>
+
+      <div class="foot"><span id="countInfo">1 item(ns)</span></div>
+    </div>
+
+    <div id="toast" class="toast" role="status" aria-live="polite">VER: TO-00017 • CY Principal → Site Externo A • Em Execução</div>
+  
+
+  <script>
+    const $ = (id)=>document.getElementById(id);
+    const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+
+    function toast(msg){
+      const t = $("toast");
+      t.textContent = msg;
+      t.classList.add("show");
+      clearTimeout(window.__toastTimer);
+      window.__toastTimer = setTimeout(()=>t.classList.remove("show"), 2600);
+    }
+
+    /* Tabs */
+    const tabs = Array.from(document.querySelectorAll(".tab"));
+    const panes = ["tab1","tab2","tab3","tab4"].map(id=>$(id));
+
+    tabs.forEach(btn=>{
+      btn.addEventListener("click", ()=>{
+        tabs.forEach(b=>b.classList.remove("active"));
+        btn.classList.add("active");
+        const target = btn.dataset.tab;
+        panes.forEach(p=>p.style.display = (p.id===target) ? "block" : "none");
+        tabs.forEach(b=>b.setAttribute("aria-selected", b===btn ? "true" : "false"));
+        updateSharedListForActiveTab(target);
+      });
+    });
+
+    function showTable(id){
+      ["layoutTable","inventoryTable","toTable","gateTable"].forEach(t=>$(t).style.display="none");
+      $(id).style.display="table";
+    }
+    function getActiveTableId(){
+      if($("layoutTable").style.display!=="none") return "layoutTable";
+      if($("inventoryTable").style.display!=="none") return "inventoryTable";
+      if($("toTable").style.display!=="none") return "toTable";
+      return "gateTable";
+    }
+    function updateCountInfo(){
+      const active = getActiveTableId();
+      const rows = Array.from($(active).querySelectorAll("tbody tr"));
+      const shown = rows.filter(r=>r.style.display!=="none").length;
+      $("countInfo").textContent = `${shown} item(ns)`;
+    }
+    function filterTable(){
+      const q = $("searchInput").value.trim().toLowerCase();
+      const active = getActiveTableId();
+      const rows = Array.from($(active).querySelectorAll("tbody tr"));
+      rows.forEach(tr=>{
+        const txt = tr.textContent.toLowerCase();
+        tr.style.display = txt.includes(q) ? "" : "none";
+      });
+      updateCountInfo();
+    }
+
+    function updateSharedListForActiveTab(tabId){
+      $("searchInput").value = "";
+      if(tabId==="tab1"){
+        $("listTitle").textContent = "Quadras Cadastradas";
+        showTable("layoutTable");
+      } else if(tabId==="tab2"){
+        $("listTitle").textContent = "Inventário Atual";
+        showTable("inventoryTable");
+      } else if(tabId==="tab3"){
+        $("listTitle").textContent = "Transfer Orders Cadastradas";
+        showTable("toTable");
+      } else {
+        $("listTitle").textContent = "Gate Event Log";
+        showTable("gateTable");
+      }
+      filterTable();
+    }
+
+    /* Demo data */
+    let currentDir = "N";
+    let stackFrom = "Row";
+
+    const dirAngles = { N:0, NE:45, E:90, SE:135, S:180, SO:225, O:270, NO:315 };
+    const dirNames  = { N:"Norte", NE:"Nordeste", E:"Leste", SE:"Sudeste", S:"Sul", SO:"Sudoeste", O:"Oeste", NO:"Noroeste" };
+
+    let layoutRows = [
+      {site:"Site Externo A", quadra:"Quadra 1", bays:7, rows:13, tiers:5, dir:"Norte", muro:"Sim", stackFrom:"Row", cap:"1.440 (X tiers)"},
+      {site:"Site Externo A", quadra:"Quadra 2", bays:10, rows:10, tiers:6, dir:"Sudoeste", muro:"Não", stackFrom:"Row", cap:"3.840 (X tiers)"},
+      {site:"Site Externo B", quadra:"Quadra 1", bays:12, rows:12, tiers:4, dir:"Leste", muro:"Sim", stackFrom:"Tier", cap:"1.792 (X tiers)"},
+    ];
+
+    let inventoryRows = [
+      {unit:"MSCU1234567", type:"Empty",  site:"Site Externo A", quadra:"Quadra 1", pos:"B03-R07-T1", status:"Presente", hold:"—", last:"Check-in"},
+      {unit:"CMAU7654321", type:"Full",   site:"Site Externo A", quadra:"Quadra 2", pos:"B05-R02-T1", status:"Presente", hold:"—", last:"Move interno"},
+      {unit:"TGHU2468135", type:"Reefer", site:"Site Externo B", quadra:"Quadra 1", pos:"B02-R09-T1", status:"Presente", hold:"Temp", last:"Check-in"},
+    ];
+
+    let toRows = [
+  {
+    to:"TO-00017",
+    orig:"CY Principal",
+    dest:"Site Externo A",
+    qty:18,
+    prog:"44%",
+    status:"Em Execução",
+    exc:1,
+    containers:["MSCU1234567","CMAU7654321"],
+    dimension:"40'HC",
+    cargo:"Dry"
+  },
+  {
+    to:"TO-00018",
+    orig:"Site Externo A",
+    dest:"CY Principal",
+    qty:12,
+    prog:"0%",
+    status:"Aprovada",
+    exc:0,
+    containers:["TGHU2468135"],
+    dimension:"20'",
+    cargo:"Reefer"
+  },
+
+      {to:"TO-00017", orig:"CY Principal", dest:"Site Externo A", qty:18, prog:"44%", status:"Em Execução", exc:1},
+      {to:"TO-00018", orig:"Site Externo A", dest:"CY Principal", qty:12, prog:"0%",  status:"Aprovada",    exc:0},
+    ];
+
+    /* Render tables */
+    function renderLayoutTable(){
+      const tb = $("layoutTbody"); tb.innerHTML = "";
+      layoutRows.forEach((r, idx)=>{
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+      <td>${r.to}</td>
+      <td>${r.orig}</td>
+      <td>${r.dest}</td>
+      <td>${r.containers ? r.containers.length : 0}</td>
+      <td>${r.dimension || "-"}</td>
+      <td>${r.cargo || "-"}</td>
+      <td>${r.qty}</td>
+      <td>${r.status}</td>
+      <td>
+        <div class="actions">
+          <button class="smallBtn" onclick="viewRow('to',${idx})">VER</button>
+          <button class="smallBtn icon secondary" title="Exportar" onclick="exportActiveTable()">⬇</button>
+        </div>
+      </td>
+    `;
+        tb.appendChild(tr);
+      });
+      updateCountInfo();
+    }
+
+    function renderInventoryTable(){
+      const tb = $("invTbody"); tb.innerHTML = "";
+      inventoryRows.forEach((r, idx)=>{
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${r.unit}</td><td>${r.type}</td><td>${r.site}</td><td>${r.quadra}</td><td>${r.pos}</td>
+          <td>${r.status}</td><td>${r.hold}</td><td>${r.last}</td>
+          <td><div class="actions">
+            <button class="smallBtn" onclick="viewRow('inv',${idx})">VER</button>
+            <button class="smallBtn icon secondary" title="Ajustar" onclick="toast('Ajuste por auditoria (demo).')">⚙</button>
+          </div></td>`;
+        tb.appendChild(tr);
+      });
+      updateCountInfo();
+    }
+
+    function renderToTable(){
+      const tb = $("toTbody"); tb.innerHTML = "";
+      toRows.forEach((r, idx)=>{
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${r.to}</td><td>${r.orig}</td><td>${r.dest}</td><td>${r.qty}</td><td>${r.prog}</td><td>${r.status}</td><td>${r.exc}</td>
+          <td><div class="actions">
+            <button class="smallBtn" onclick="viewRow('to',${idx})">VER</button>
+            <button class="smallBtn icon secondary" title="Exportar" onclick="exportActiveTable()">⬇</button>
+          </div></td>`;
+        tb.appendChild(tr);
+      });
+      updateCountInfo();
+    }
+
+    function viewRow(type, idx){
+      if(type==="layout"){
+        const r = layoutRows[idx];
+        toast(`VER: ${r.site} / ${r.quadra} • ${r.bays}x${r.rows} • ${r.dir}`);
+      } else if(type==="inv"){
+        const r = inventoryRows[idx];
+        toast(`VER: ${r.unit} • ${r.site}/${r.quadra} • ${r.pos}`);
+      } else {
+        const r = toRows[idx];
+        toast(`VER: ${r.to} • ${r.orig} → ${r.dest} • ${r.status}`);
+      }
+    }
+
+    function deleteRow(type, idx){
+      if(!confirm("Excluir este registro? (demo)")) return;
+      if(type==="layout") layoutRows.splice(idx,1);
+      renderLayoutTable(); toast("Registro excluído (demo).");
+    }
+
+    /* Export CSV */
+    function exportActiveTable(){
+      const active = getActiveTableId();
+      const filename = active==="layoutTable" ? "quadras_vsc.csv" : active==="inventoryTable" ? "inventario_vsc.csv" : active==="toTable" ? "transfer_orders.csv" : "gate_event_log.csv";
+      exportTableCsv(active, filename);
+    }
+    function exportTableCsv(tableId, filename){
+      const table = $(tableId);
+      const rows = Array.from(table.querySelectorAll("tr")).filter(r=>r.style.display!=="none");
+      const csv = rows.map(row=>{
+        const cells = Array.from(row.querySelectorAll("th,td"));
+        return cells.map(c => `"${c.textContent.replaceAll('"','""').trim()}"`).join(",");
+      }).join("\n");
+      const blob = new Blob([csv], {type:"text/csv;charset=utf-8;"});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a"); a.href = url; a.download = filename;
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      toast(`Exportado: ${filename}`);
+    }
+
+    /* Layout (grid) */
+    function renderAxes(rows, bays, yId, xId){
+      const y = $(yId), x = $(xId);
+      y.innerHTML = ""; x.innerHTML = "";
+      for(let r=1;r<=rows;r++){ const d=document.createElement("div"); d.textContent=r; y.appendChild(d); }
+      x.style.gridTemplateColumns = `repeat(${bays}, 40px)`;
+      for(let b=0;b<bays;b++){ const s=document.createElement("span"); s.textContent=letters[b]||"?"; x.appendChild(s); }
+    }
+
+    function renderGrid(rows, bays, gridId, pattern){
+      const grid = $(gridId);
+      grid.innerHTML = "";
+      grid.style.gridTemplateColumns = `repeat(${bays}, 40px)`;
+      for(let r=1;r<=rows;r++){
+        for(let b=1;b<=bays;b++){
+          const d=document.createElement("div"); d.className="slot";
+          if(pattern && (r+b)%5===0) d.classList.add("occ");
+          d.addEventListener("click", ()=>d.classList.toggle("occ"));
+          grid.appendChild(d);
+        }
+      }
+    }
+
+    function generateLayout(){
+      const bays = parseInt($("bayQty").value,10);
+      const rows = parseInt($("rowQty").value,10);
+      renderAxes(rows, bays, "yAxis", "xAxis");
+      renderGrid(rows, bays, "yardGrid", false);
+
+      // Tab2 occupancy grid (demo pattern)
+      renderAxes(rows, bays, "yAxis2", "xAxis2");
+      renderGrid(rows, bays, "yardGrid2", true);
+
+      toast("Visualização gerada.");
+    }
+
+    function applyWalls(){
+      $("yardWallsTop").innerHTML    = $("wTop").checked    ? `<div class="wallLine" style="height:6px;width:86%"></div>` : "";
+      $("yardWallsBottom").innerHTML = $("wBottom").checked ? `<div class="wallLine" style="height:6px;width:86%"></div>` : "";
+      $("yardWallsLeft").innerHTML   = $("wLeft").checked   ? `<div class="wallLine" style="width:6px;height:86%"></div>` : "";
+      $("yardWallsRight").innerHTML  = $("wRight").checked  ? `<div class="wallLine" style="width:6px;height:86%"></div>` : "";
+    }
+
+    function clearTab1(){
+      $("siteName").value=""; $("siteOperator").value=""; $("quadraName").value="";
+      $("capMax").value="XXX (X Tiers)"; $("muro").value="nao"; $("restricoes").value="Empty/Full (padrão)";
+      $("altMax").value="--"; $("bayQty").value="7"; $("rowQty").value="13"; $("tierQty").value="5";
+      $("wTop").checked=$("wLeft").checked=$("wRight").checked=$("wBottom").checked=false;
+      applyWalls(); generateLayout(); toast("Campos limpos.");
+    }
+
+    /* Direção + toggle */
+    function setDir(dir){
+      currentDir = dir;
+      document.querySelectorAll(".dirbtn").forEach(b=>b.classList.toggle("active", b.dataset.dir===dir));
+      $("needleSvg").style.transform = `rotate(${dirAngles[dir]||0}deg)`;
+    }
+    function toggleRowTier(){
+      const t = $("toggleRowTier");
+      t.classList.toggle("on");
+      stackFrom = t.classList.contains("on") ? "Tier" : "Row";
+      toast(`Empilhar a partir de: ${stackFrom}`);
+    }
+
+    function saveSiteQuadra(){
+      const site = $("siteName").value.trim() || "Site Externo (sem nome)";
+      const quadra = $("quadraName").value.trim() || "Quadra (sem nome)";
+      const bays = parseInt($("bayQty").value,10);
+      const rows = parseInt($("rowQty").value,10);
+      const tiers = parseInt($("tierQty").value,10);
+      const dirLabel = dirNames[currentDir] || "Norte";
+      const muroLabel = $("muro").value==="nao" ? "Não" : "Sim";
+      const cap = $("capMax").value.trim() || `${(bays*rows)} (X tiers)`;
+
+      layoutRows.unshift({site, quadra, bays, rows, tiers, dir:dirLabel, muro:muroLabel, stackFrom, cap});
+      renderLayoutTable();
+      toast("Site/Quadra cadastrados (demo).");
+    }
+
+    /* Tab2 ops (demo) */
+    function quickCheck(mode){
+      const unit = prompt(`Informe o CNTR para Check-${mode==="in"?"in":"out"} (demo):`, "MSCU0000000");
+      if(!unit) return;
+
+      if(mode==="in"){
+        inventoryRows.unshift({
+          unit,
+          type: $("invTipo").value==="Todos" ? "Empty" : $("invTipo").value,
+          site: $("invSite").value,
+          quadra: $("invQuadra").value,
+          pos: `B${String(Math.floor(Math.random()*7)+1).padStart(2,"0")}-R${String(Math.floor(Math.random()*13)+1).padStart(2,"0")}-T1`,
+          status:"Presente",
+          hold:"—",
+          last:"Check-in"
+        });
+        toast(`Check-in registrado: ${unit}`);
+      }else{
+        const idx = inventoryRows.findIndex(r=>r.unit===unit);
+        if(idx>=0){ inventoryRows.splice(idx,1); toast(`Check-out registrado: ${unit}`); }
+        else toast("CNTR não encontrado no inventário (demo).");
+      }
+      renderInventoryTable();
+    }
+
+    function seedAudit(){
+      if(inventoryRows.length===0) return toast("Inventário vazio (demo).");
+      const i = Math.floor(Math.random()*inventoryRows.length);
+      inventoryRows[i].hold = "Diverg.";
+      inventoryRows[i].last = "Auditoria";
+      renderInventoryTable();
+      toast("Auditoria iniciada (demo): divergências marcadas.");
+    }
+
+    /* Tab3 ops (demo) */
+    function planTO(){
+      toast("Lista planejada gerada (demo). Agora publique a TO.");
+    }
+    function publishTO(){
+      const qty = 10 + Math.floor(Math.random()*18);
+      const done = Math.floor(qty*(0.2+Math.random()*0.6));
+      const id = `TO-${String(20+Math.floor(Math.random()*80)).padStart(5,"0")}`;
+      toRows.unshift({
+        to:id, orig:$("toOrig").value, dest:$("toDest").value,
+        qty, prog:`${Math.round((done/qty)*100)}%`, status:"Em Execução", exc:Math.floor(Math.random()*3)
+      });
+      renderToTable();
+      toast(`TO publicada: ${id} (demo).`);
+    }
+
+    
+    /* ------------------------------
+       TAB 4: Gate Control (demo)
+    ------------------------------ */
+    let gateRows = [
+      {ts:"2026-01-04 20:10:12", action:"Gate In", site:"Site Externo A", lane:"Lane 01", appt:"APT-2026-000123",
+       truck:"ABC1D23", driver:"000.000.000-00", cntr:"MSCU1234567", iso:"40HC", fullEmpty:"Empty", seal:"SEAL987654", docref:"TO-00017",
+       val:"OK", ev:"Completo", dec:"Liberado"}
+    ];
+
+    function renderGateTable(){
+      const tb = $("gateTbody"); tb.innerHTML = "";
+      gateRows.forEach((r, idx)=>{
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${r.ts}</td><td>${r.action}</td><td>${r.site}</td><td>${r.lane}</td><td>${r.appt}</td>
+          <td>${r.truck}</td><td>${r.driver}</td><td>${r.cntr}</td><td>${r.iso}</td><td>${r.fullEmpty}</td><td>${r.seal}</td><td>${r.docref}</td>
+          <td>${r.val}</td><td>${r.ev}</td><td>${r.dec}</td>
+          <td>
+            <div class="actions">
+              <button class="smallBtn" onclick="toast('VER: ${r.cntr} • ${r.action} (${r.ts})')">VER</button>
+              <button class="smallBtn icon danger" title="Excluir" onclick="deleteGate(${idx})">🗑</button>
+            </div>
+          </td>`;
+        tb.appendChild(tr);
+      });
+      updateCountInfo();
+    }
+
+    function deleteGate(idx){
+      if(!confirm("Excluir este evento do Gate Log? (demo)")) return;
+      gateRows.splice(idx,1);
+      renderGateTable();
+      toast("Evento excluído (demo).");
+    }
+
+    function nowTs(){
+      const d = new Date();
+      const pad = (n)=>String(n).padStart(2,"0");
+      return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
+    }
+
+    function setError(wrapId, on){
+      const el = $(wrapId);
+      if(!el) return;
+      el.classList.toggle("error", !!on);
+    }
+    function valText(inputId, wrapId){
+      const v = ($(inputId).value||"").trim();
+      const bad = (v.length===0);
+      setError(wrapId, bad);
+      return !bad;
+    }
+    function valSelect(selectId, wrapId){
+      const v = ($(selectId).value||"");
+      const bad = (v.trim().length===0);
+      setError(wrapId, bad);
+      return !bad;
+    }
+
+    function getEvidenceState(){
+      const need = ["c_ocr","c_plate","c_seal"];
+      const ok = need.every(id => !$(id).classList.contains("off"));
+      const any = ["c_ocr","c_plate","c_seal","c_photo","c_damage"].some(id => !$(id).classList.contains("off"));
+      return {ok, any};
+    }
+
+    function updateDecisionUI(validOk){
+      const ev = getEvidenceState();
+      const valBadge = $("valBadge");
+      const evBadge  = $("evBadge");
+      const decBadge = $("decBadge");
+
+      if(validOk){ valBadge.textContent="OK"; valBadge.className="badge ok"; }
+      else { valBadge.textContent="Pendente"; valBadge.className="badge warn"; }
+
+      if(ev.ok){ evBadge.textContent="Completo"; evBadge.className="badge ok"; }
+      else { evBadge.textContent = ev.any ? "Parcial" : "Incompleto"; evBadge.className="badge warn"; }
+
+      if(validOk && ev.ok){ decBadge.textContent="Liberado"; decBadge.className="badge ok"; }
+      else { decBadge.textContent="Bloqueado"; decBadge.className="badge warn"; }
+    }
+
+    function isGateFormFilled(){
+      const ids = ["gAction","gSite","gLane","gAppt","gTruck","gDriver","gCntr","gIso","gFullEmpty","gSeal","gDocref","gTs"];
+      return ids.every(i => (($(i).value||"")+"").trim().length>0);
+    }
+
+    function toggleChip(id){
+      const el = $(id);
+      el.classList.toggle("off");
+      updateDecisionUI(isGateFormFilled());
+    }
+
+    function gateValidate(){
+      const ok =
+        valSelect("gAction","g_action") &&
+        valSelect("gSite","g_site") &&
+        valSelect("gLane","g_lane") &&
+        valText("gAppt","g_appt") &&
+        valText("gTruck","g_truck") &&
+        valText("gDriver","g_driver") &&
+        valText("gCntr","g_cntr") &&
+        valSelect("gIso","g_iso") &&
+        valSelect("gFullEmpty","g_fullEmpty") &&
+        valText("gSeal","g_seal") &&
+        valText("gDocref","g_docref") &&
+        valText("gTs","g_ts");
+
+      updateDecisionUI(ok);
+      if(!ok){
+        toast("Campos obrigatórios pendentes (Gate).");
+        const first = document.querySelector("#tab4 .error");
+        if(first) first.scrollIntoView({behavior:"smooth", block:"center"});
+      } else {
+        toast("Validação OK (Gate).");
+      }
+      return ok;
+    }
+    function gateValidateOnly(){ gateValidate(); }
+
+    function gateClear(){
+      ["gAction","gSite","gLane","gIso","gFullEmpty"].forEach(id=>$(id).value="");
+      ["gAppt","gTruck","gDriver","gCntr","gSeal","gDocref"].forEach(id=>$(id).value="");
+      document.querySelectorAll("#tab4 .error").forEach(e=>e.classList.remove("error"));
+      ["c_ocr","c_plate","c_seal","c_photo","c_damage"].forEach(id=>$(id).classList.remove("off"));
+      $("gTs").value = nowTs();
+      updateDecisionUI(false);
+      toast("Campos limpos (Gate).");
+    }
+
+    function gateRegister(){
+      const ok = gateValidate();
+      if(!ok) return;
+
+      const ev = getEvidenceState();
+      const decision = (ok && ev.ok) ? "Liberado" : "Bloqueado";
+
+      gateRows.unshift({
+        ts: $("gTs").value.trim(),
+        action: $("gAction").value,
+        site: $("gSite").value,
+        lane: $("gLane").value,
+        appt: $("gAppt").value.trim(),
+        truck: $("gTruck").value.trim(),
+        driver: $("gDriver").value.trim(),
+        cntr: $("gCntr").value.trim().toUpperCase(),
+        iso: $("gIso").value,
+        fullEmpty: $("gFullEmpty").value,
+        seal: $("gSeal").value.trim(),
+        docref: $("gDocref").value.trim(),
+        val: "OK",
+        ev: ev.ok ? "Completo" : (ev.any ? "Parcial" : "Incompleto"),
+        dec: decision
+      });
+
+      renderGateTable();
+      toast(`Evento registrado: ${$("gAction").value} • ${$("gCntr").value.trim().toUpperCase()} • ${decision}`);
+    }
+
+    // live validation Gate
+    const gLive = [
+      ["gAction","g_action","select"],["gSite","g_site","select"],["gLane","g_lane","select"],
+      ["gAppt","g_appt","text"],["gTruck","g_truck","text"],["gDriver","g_driver","text"],
+      ["gCntr","g_cntr","text"],["gIso","g_iso","select"],["gFullEmpty","g_fullEmpty","select"],
+      ["gSeal","g_seal","text"],["gDocref","g_docref","text"]
+    ];
+    gLive.forEach(([id, wrap, typ])=>{
+      const el = $(id);
+      if(!el) return;
+      const fn = ()=> (typ==="text") ? valText(id,wrap) : valSelect(id,wrap);
+      el.addEventListener("input", ()=>{ fn(); updateDecisionUI(isGateFormFilled()); });
+      el.addEventListener("change", ()=>{ fn(); updateDecisionUI(isGateFormFilled()); });
+    });
+
+
+/* Init */
+    function init(){
+      $("bayQty").value="7"; $("rowQty").value="13"; $("tierQty").value="5";
+      setDir("N"); generateLayout(); applyWalls();
+      renderLayoutTable(); renderInventoryTable(); renderToTable();
+      $("gTs").value = nowTs();
+      ["c_ocr","c_plate","c_seal","c_photo","c_damage"].forEach(id=>$(id).classList.remove("off"));
+      updateDecisionUI(false);
+      renderGateTable();
+      updateSharedListForActiveTab("tab1");
+    }
+    init();
+  </script>
 
 
 </body></html>
