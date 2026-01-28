@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0080)file:///C:/Users/HxTos/Downloads/CY_VSC_MultiSite_TelaUnica_com_GateControl.html -->
+<!-- saved from url=(0049)file:///C:/Users/HxTos/Downloads/index%20(8).html -->
 <html lang="pt-BR"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   
   <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -54,11 +54,12 @@
     @media (max-width:520px){.grid2{grid-template-columns:1fr}}
     .field{display:flex;flex-direction:column;gap:7px}
     .label{font-size:12px;color:var(--muted);font-weight:800}
-    input,select{
+    input,select,textarea{
       border:1px solid rgba(0,0,0,.14);border-radius:8px;padding:10px 12px;outline:none;
       background:#f2f2f2;color:#2b2b2b;font-size:13px;transition:.15s ease;
+      font-family:inherit;
     }
-    input:focus,select:focus{border-color:rgba(0,166,200,.55);box-shadow:0 0 0 4px var(--focus);background:#fff}
+    input:focus,select:focus,textarea:focus{border-color:rgba(0,166,200,.55);box-shadow:0 0 0 4px var(--focus);background:#fff}
     .btnrow{display:flex;gap:12px;justify-content:flex-end;align-items:center;margin-top:10px;flex-wrap:wrap}
     .btn{
       border:none;padding:10px 14px;border-radius:10px;font-weight:900;cursor:pointer;
@@ -182,7 +183,7 @@
       --amber:#a85d00;
     }
     .req{color:var(--danger);font-weight:900}
-    .error input,.error select{
+    .error input,.error select,.error textarea{
       border-color: var(--danger)!important;
       background: var(--dangerBg)!important;
       box-shadow: 0 0 0 4px rgba(193,18,31,.14)!important;
@@ -247,9 +248,9 @@
         <h1 class="title">VSC Multi-Site</h1>
 
         <div class="tabs" role="tablist" aria-label="VSC Tabs">
-          <button class="tab active" data-tab="tab1" role="tab" aria-selected="true"><span class="pill"></span> Sites &amp; Layout</button>
+          <button class="tab" data-tab="tab1" role="tab" aria-selected="false"><span class="pill"></span> Sites &amp; Layout</button>
           <button class="tab" data-tab="tab2" role="tab" aria-selected="false"><span class="pill"></span> Inventário &amp; Reconciliação</button>
-          <button class="tab" data-tab="tab3" role="tab" aria-selected="false"><span class="pill"></span> Transfer Orders</button>
+          <button class="tab active" data-tab="tab3" role="tab" aria-selected="true"><span class="pill"></span> Transfer Orders</button>
           <button class="tab" data-tab="tab4" role="tab" aria-selected="false"><span class="pill"></span> Gate Control</button>
         </div>
       </div>
@@ -257,7 +258,7 @@
       <div class="content">
 
         <!-- TAB 1: Sites & Layout -->
-        <div id="tab1" class="tabPane" style="display: block;">
+        <div id="tab1" class="tabPane" style="display: none;">
           <div class="twoCol">
             <div class="panel">
               <p class="sub">Cadastro base</p>
@@ -402,12 +403,12 @@
                     <div id="yardWallsBottom" class="yardWallsBottom"></div>
                     <div id="yardWallsLeft" class="yardWallsLeft"></div>
                     <div id="yardWallsRight" class="yardWallsRight"></div>
-                    <div id="yardGrid" class="yardGrid" style="grid-template-columns: repeat(7, 40px);"><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div></div>
+                    <div id="yardGrid" class="yardGrid" style="grid-template-columns: repeat(7, 40px);"><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div></div>
                   </div>
 
                   <div id="xAxis" class="xAxis" style="grid-template-columns: repeat(7, 40px);"><span>A</span><span>B</span><span>C</span><span>D</span><span>E</span><span>F</span><span>G</span></div>
 
-                  <p class="hint" style="margin-top:8px">Clique em um slot para simular “ocupado” (demo).</p>
+                  <p class="hint" style="margin-top:8px">Clique em um slot para simular "ocupado" (demo).</p>
                 </div>
               </div>
             </div>
@@ -471,7 +472,7 @@
               <div class="yardWrap">
                 <div class="yAxis" id="yAxis2"><div>1</div><div>2</div><div>3</div><div>4</div><div>5</div><div>6</div><div>7</div><div>8</div><div>9</div><div>10</div><div>11</div><div>12</div><div>13</div></div>
                 <div>
-                  <div class="yard"><div id="yardGrid2" class="yardGrid" style="grid-template-columns: repeat(7, 40px);"><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot occ"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot occ"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot occ"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot occ"></div><div class="slot occ"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot occ"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot occ"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot occ"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot occ"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot occ"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot occ"></div><div class="slot occ"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot occ"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot occ"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot occ"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot occ"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot occ"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot occ"></div></div></div>
+                  <div class="yard"><div id="yardGrid2" class="yardGrid" style="grid-template-columns: repeat(7, 40px);"><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot occ"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot occ"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot occ"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot occ"></div><div class="slot occ"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot occ"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot occ"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot occ"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot occ"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot occ"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot occ"></div><div class="slot occ"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot occ"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot occ"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot occ"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot occ"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot occ"></div></div></div>
                   <div class="xAxis" id="xAxis2" style="grid-template-columns: repeat(7, 40px);"><span>A</span><span>B</span><span>C</span><span>D</span><span>E</span><span>F</span><span>G</span></div>
                   <p class="hint" style="margin-top:8px">Slots em azul simulam ocupação. Clique para alternar.</p>
                 </div>
@@ -481,7 +482,7 @@
         </div>
 
         <!-- TAB 3: Transfer Orders -->
-        <div id="tab3" class="tabPane" style="display: none;">
+        <div id="tab3" class="tabPane" style="display: block;">
           <div class="twoCol">
             <div class="panel">
               <p class="sub">Cadastro base (Transfer Order)</p>
@@ -493,6 +494,41 @@
                 <div class="field"><div class="label">Destino</div>
                   <select id="toDest"><option>Site Externo A</option><option>Site Externo B</option><option>CY Principal</option></select>
                 </div>
+                
+                <!-- NOVO CAMPO: Contêineres -->
+                <div class="field">
+                  <div class="label">Contêineres <span class="hint">(separados por vírgula)</span></div>
+                  <textarea 
+                    id="toContainers" 
+                    placeholder="Ex: MSCU1234567, CMAU7654321, TGHU2468135"
+                    rows="2"
+                    style="
+                      width: 100%;
+                      border: 1px solid rgba(0,0,0,.14);
+                      border-radius: 8px;
+                      padding: 10px 12px;
+                      outline: none;
+                      background: #f2f2f2;
+                      color: #2b2b2b;
+                      font-size: 13px;
+                      font-family: inherit;
+                      resize: vertical;
+                      transition: .15s ease;
+                      min-height: 60px;
+                    "
+                    onfocus="
+                      this.style.borderColor='rgba(0,166,200,.55)';
+                      this.style.boxShadow='0 0 0 4px var(--focus)';
+                      this.style.background='#fff';
+                    "
+                    onblur="
+                      this.style.borderColor='rgba(0,0,0,.14)';
+                      this.style.boxShadow='none';
+                      this.style.background='#f2f2f2';
+                    "
+                  ></textarea>
+                </div>
+                
                 <div class="field"><div class="label">Janela (início)</div><input id="toStart" type="datetime-local"></div>
                 <div class="field"><div class="label">Janela (fim)</div><input id="toEnd" type="datetime-local"></div>
                 <div class="field"><div class="label">Prioridade</div><select id="toPrio"><option>Normal</option><option>Alta</option></select></div>
@@ -500,7 +536,7 @@
               </div>
 
               <div class="btnrow">
-                <button class="btn light" onclick="toast(&#39;Filtros limpos (demo).&#39;)">Limpar</button>
+                <button class="btn light" onclick="clearTab3()">Limpar</button>
                 <button class="btn primary" onclick="planTO()">Gerar Lista Planejada</button>
               </div>
 
@@ -527,7 +563,7 @@
             <div class="panel vizPanel">
               <p class="sub" style="margin-top:0">Cockpit (indicadores)</p>
               <p class="hint">
-                Aqui você “pluga” KPIs: lead time por rota, % no prazo, exceções e replanejamentos.
+                Aqui você "pluga" KPIs: lead time por rota, % no prazo, exceções e replanejamentos.
                 No protótipo, são dados simulados ao publicar a TO.
               </p>
               <div class="divider"></div>
@@ -691,7 +727,7 @@
     <!-- LISTA (tabela compartilhada, muda conforme aba) -->
     <div class="tableCard">
       <div class="tableHead">
-        <h2 class="tableTitle" id="listTitle">Quadras Cadastradas</h2>
+        <h2 class="tableTitle" id="listTitle">Transfer Orders Cadastradas</h2>
         <button class="exportBtn" onclick="exportActiveTable()">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <path d="M12 3v10m0 0 4-4m-4 4-4-4M4 17v3h16v-3" stroke="white" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -706,7 +742,7 @@
 
       <div style="overflow:auto;">
         <!-- Layout -->
-        <table id="layoutTable" style="display: table;">
+        <table id="layoutTable" style="display: none;">
           <thead>
             <tr>
               <th>Site</th><th>Quadra</th><th>Bays</th><th>Rows</th><th>Tiers</th>
@@ -719,7 +755,7 @@
           <td>
             <div class="actions">
               <button class="smallBtn" onclick="viewRow(&#39;layout&#39;,0)">VER</button>
-              <button class="smallBtn icon secondary" title="Editar" onclick="toast(&#39;Editar (demo): use o formulário e “Cadastrar”.&#39;)">✎</button>
+              <button class="smallBtn icon secondary" title="Editar" onclick="toast(&#39;Editar (demo): use o formulário e "Cadastrar".&#39;)">✎</button>
               <button class="smallBtn icon danger" title="Excluir" onclick="deleteRow(&#39;layout&#39;,0)">🗑</button>
             </div>
           </td></tr><tr>
@@ -728,7 +764,7 @@
           <td>
             <div class="actions">
               <button class="smallBtn" onclick="viewRow(&#39;layout&#39;,1)">VER</button>
-              <button class="smallBtn icon secondary" title="Editar" onclick="toast(&#39;Editar (demo): use o formulário e “Cadastrar”.&#39;)">✎</button>
+              <button class="smallBtn icon secondary" title="Editar" onclick="toast(&#39;Editar (demo): use o formulário e "Cadastrar".&#39;)">✎</button>
               <button class="smallBtn icon danger" title="Excluir" onclick="deleteRow(&#39;layout&#39;,1)">🗑</button>
             </div>
           </td></tr><tr>
@@ -737,7 +773,7 @@
           <td>
             <div class="actions">
               <button class="smallBtn" onclick="viewRow(&#39;layout&#39;,2)">VER</button>
-              <button class="smallBtn icon secondary" title="Editar" onclick="toast(&#39;Editar (demo): use o formulário e “Cadastrar”.&#39;)">✎</button>
+              <button class="smallBtn icon secondary" title="Editar" onclick="toast(&#39;Editar (demo): use o formulário e "Cadastrar".&#39;)">✎</button>
               <button class="smallBtn icon danger" title="Excluir" onclick="deleteRow(&#39;layout&#39;,2)">🗑</button>
             </div>
           </td></tr></tbody>
@@ -772,19 +808,19 @@
         </table>
 
         <!-- TO -->
-        <table id="toTable" style="display: none;">
+        <table id="toTable" style="display: table;">
           <thead>
             <tr>
-              <th>TO</th><th>Origem</th><th>Destino</th><th>Qtde</th><th>Progresso</th><th>Status</th><th>Exceções</th><th>Ações</th>
+              <th>TO</th><th>Origem</th><th>Destino</th><th>Contêineres</th><th>Quantidade</th><th>Progresso</th><th>Status</th><th>Exceções</th><th>Ações</th>
             </tr>
           </thead>
           <tbody id="toTbody"><tr>
-          <td>TO-00017</td><td>CY Principal</td><td>Site Externo A</td><td>18</td><td>44%</td><td>Em Execução</td><td>1</td>
+          <td>TO-00017</td><td>CY Principal</td><td>Site Externo A</td><td>MSCU1234567, CMAU7654321</td><td>18</td><td>44%</td><td>Em Execução</td><td>1</td>
           <td><div class="actions">
             <button class="smallBtn" onclick="viewRow(&#39;to&#39;,0)">VER</button>
             <button class="smallBtn icon secondary" title="Exportar" onclick="exportActiveTable()">⬇</button>
           </div></td></tr><tr>
-          <td>TO-00018</td><td>Site Externo A</td><td>CY Principal</td><td>12</td><td>0%</td><td>Aprovada</td><td>0</td>
+          <td>TO-00018</td><td>Site Externo A</td><td>CY Principal</td><td>TGHU2468135, ...</td><td>12</td><td>0%</td><td>Aprovada</td><td>0</td>
           <td><div class="actions">
             <button class="smallBtn" onclick="viewRow(&#39;to&#39;,1)">VER</button>
             <button class="smallBtn icon secondary" title="Exportar" onclick="exportActiveTable()">⬇</button>
@@ -815,10 +851,10 @@
 
       </div>
 
-      <div class="foot"><span id="countInfo">3 item(ns)</span></div>
+      <div class="foot"><span id="countInfo">2 item(ns)</span></div>
     </div>
 
-    <div id="toast" class="toast" role="status" aria-live="polite">Campos obrigatórios pendentes (Gate).</div>
+    <div id="toast" class="toast" role="status" aria-live="polite">Visualização gerada.</div>
   </div>
 
   <script>
@@ -913,8 +949,8 @@
     ];
 
     let toRows = [
-      {to:"TO-00017", orig:"CY Principal", dest:"Site Externo A", qty:18, prog:"44%", status:"Em Execução", exc:1},
-      {to:"TO-00018", orig:"Site Externo A", dest:"CY Principal", qty:12, prog:"0%",  status:"Aprovada",    exc:0},
+      {to:"TO-00017", orig:"CY Principal", dest:"Site Externo A", containers:"MSCU1234567, CMAU7654321", qty:18, prog:"44%", status:"Em Execução", exc:1},
+      {to:"TO-00018", orig:"Site Externo A", dest:"CY Principal", containers:"TGHU2468135, ...", qty:12, prog:"0%",  status:"Aprovada",    exc:0},
     ];
 
     /* Render tables */
@@ -928,7 +964,7 @@
           <td>
             <div class="actions">
               <button class="smallBtn" onclick="viewRow('layout',${idx})">VER</button>
-              <button class="smallBtn icon secondary" title="Editar" onclick="toast('Editar (demo): use o formulário e “Cadastrar”.')">✎</button>
+              <button class="smallBtn icon secondary" title="Editar" onclick="toast('Editar (demo): use o formulário e "Cadastrar".')">✎</button>
               <button class="smallBtn icon danger" title="Excluir" onclick="deleteRow('layout',${idx})">🗑</button>
             </div>
           </td>`;
@@ -958,7 +994,14 @@
       toRows.forEach((r, idx)=>{
         const tr = document.createElement("tr");
         tr.innerHTML = `
-          <td>${r.to}</td><td>${r.orig}</td><td>${r.dest}</td><td>${r.qty}</td><td>${r.prog}</td><td>${r.status}</td><td>${r.exc}</td>
+          <td>${r.to}</td>
+          <td>${r.orig}</td>
+          <td>${r.dest}</td>
+          <td>${r.containers || "—"}</td>
+          <td>${r.qty}</td>
+          <td>${r.prog}</td>
+          <td>${r.status}</td>
+          <td>${r.exc}</td>
           <td><div class="actions">
             <button class="smallBtn" onclick="viewRow('to',${idx})">VER</button>
             <button class="smallBtn icon secondary" title="Exportar" onclick="exportActiveTable()">⬇</button>
@@ -977,7 +1020,8 @@
         toast(`VER: ${r.unit} • ${r.site}/${r.quadra} • ${r.pos}`);
       } else {
         const r = toRows[idx];
-        toast(`VER: ${r.to} • ${r.orig} → ${r.dest} • ${r.status}`);
+        const containerMsg = r.containers ? ` • Contêineres: ${r.containers}` : '';
+        toast(`VER: ${r.to} • ${r.orig} → ${r.dest}${containerMsg} • ${r.status}`);
       }
     }
 
@@ -1122,19 +1166,55 @@
     }
 
     /* Tab3 ops (demo) */
+    function clearTab3() {
+      $("toOrig").value = "CY Principal";
+      $("toDest").value = "Site Externo A";
+      $("toContainers").value = "";
+      $("toStart").value = "";
+      $("toEnd").value = "";
+      $("toPrio").value = "Normal";
+      $("toMot").value = "Overflow";
+      $("toStrat").value = "FIFO (dwell)";
+      $("toElig").value = "Bloquear holds impeditivos";
+      toast("Campos da aba Transfer Orders limpos.");
+    }
+    
     function planTO(){
       toast("Lista planejada gerada (demo). Agora publique a TO.");
     }
+    
     function publishTO(){
       const qty = 10 + Math.floor(Math.random()*18);
       const done = Math.floor(qty*(0.2+Math.random()*0.6));
       const id = `TO-${String(20+Math.floor(Math.random()*80)).padStart(5,"0")}`;
+      
+      // Obter contêineres do campo
+      const containersInput = $("toContainers").value.trim();
+      const containers = containersInput 
+        ? containersInput.split(',').map(c => c.trim()).filter(c => c.length > 0)
+        : [];
+      
       toRows.unshift({
-        to:id, orig:$("toOrig").value, dest:$("toDest").value,
-        qty, prog:`${Math.round((done/qty)*100)}%`, status:"Em Execução", exc:Math.floor(Math.random()*3)
+        to:id, 
+        orig:$("toOrig").value, 
+        dest:$("toDest").value,
+        containers: containers.join(', '), // Adicionar ao objeto
+        qty, 
+        prog:`${Math.round((done/qty)*100)}%`, 
+        status:"Em Execução", 
+        exc:Math.floor(Math.random()*3)
       });
+      
       renderToTable();
-      toast(`TO publicada: ${id} (demo).`);
+      
+      // Mensagem de confirmação mostrando contêineres
+      const containerMsg = containers.length > 0 
+        ? ` com ${containers.length} contêiner(es)` 
+        : '';
+      toast(`TO publicada: ${id}${containerMsg} (demo).`);
+      
+      // Limpar campo opcional
+      $("toContainers").value = "";
     }
 
     
