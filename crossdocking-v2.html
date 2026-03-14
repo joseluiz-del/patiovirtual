@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HXtos CY - Crossdocking Carga/Contêiner</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f3f4f6;
+            color: #1f2937;
+        }
+
+        .header {
+            background-color: #0097B2;
+            color: white;
+            padding: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .header h1 {
+            font-size: 1.875rem;
+            font-weight: 700;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        .stepper {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+            padding: 1rem;
+            background: white;
+            border-bottom: 1px solid #e5e7eb;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            overflow-x: auto;
+        }
+
+        .step {
+            display: flex;
+            align-items: center;
+            flex: 1;
+            min-width: 60px;
+        }
+
+        .step-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            background-color: #d1d5db;
+            color: #6b7280;
+            flex-shrink: 0;
+            font-size: 0.875rem;
+        }
+
+        .step-circle.active {
+            background-color: #0097B2;
+            color: white;
+        }
+
+        .step-circle.completed {
+            background-color: #0097B2;
+            color: white;
+        }
+
+        .step-line {
+            flex: 1;
+            height: 4px;
+            background-color: #d1d5db;
+            margin: 0 0.5rem;
+            min-width: 20px;
+        }
+
+        .step-line.active {
+            background-color: #0097B2;
+        }
+
+        .content {
+            background: white;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            margin-bottom: 2rem;
+            min-height: 400px;
+        }
+
+        .content h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #374151;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.5rem 1rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.375rem;
+            font-size: 1rem;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #0097B2;
+            box-shadow: 0 0 0 3px rgba(0, 151, 178, 0.1);
+        }
+
+        .info-box {
+            background-color: #eff6ff;
+            border: 1px solid #bfdbfe;
+            border-left: 4px solid #0097B2;
+            padding: 1rem;
+            border-radius: 0.375rem;
+            margin-bottom: 1rem;
+        }
+
+        .info-box p {
+            font-size: 0.875rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .info-box strong {
+            color: #1f2937;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .card:hover {
+            border-color: #0097B2;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .card.selected {
+            border: 2px solid #0097B2;
+            background-color: #eff6ff;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 0.75rem;
+        }
+
+        .card-title {
+            font-weight: 700;
+            color: #1f2937;
+        }
+
+        .card-subtitle {
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 0.25rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: white;
+        }
+
+        .badge-cliente {
+            background-color: #3b82f6;
+        }
+
+        .badge-armador {
+            background-color: #10b981;
+        }
+
+        .capacity-bar {
+            width: 100%;
+            height: 8px;
+            background-color: #e5e7eb;
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 0.5rem 0;
+        }
+
+        .capacity-fill {
+            height: 100%;
+            background-color: #0097B2;
+            transition: width 0.3s;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1rem;
+        }
+
+        .table thead {
+            background-color: #0097B2;
+            color: white;
+        }
+
+        .table th {
+            padding: 0.75rem;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+
+        .table td {
+            padding: 0.75rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .table tbody tr:nth-child(even) {
+            background-color: #f9fafb;
+        }
+
+        .table input {
+            width: 80px;
+            padding: 0.25rem 0.5rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.25rem;
+            text-align: center;
+        }
+
+        .stat-card {
+            background-color: #eff6ff;
+            border: 1px solid #bfdbfe;
+            padding: 1rem;
+            border-radius: 0.375rem;
+            text-align: center;
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: #6b7280;
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-value {
+            font-size: 1.875rem;
+            font-weight: 700;
+            color: #0097B2;
+        }
+
+        .warning-box {
+            background-color: #fef3c7;
+            border: 1px solid #fcd34d;
+            border-left: 4px solid #f59e0b;
+            padding: 1rem;
+            border-radius: 0.375rem;
+            margin-bottom: 1rem;
+        }
+
+        .warning-box-title {
+            font-weight: 600;
+            color: #92400e;
+            margin-bottom: 0.25rem;
+        }
+
+        .warning-box-text {
+            font-size: 0.875rem;
+            color: #b45309;
+        }
+
+        .success-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem 1rem;
+            text-align: center;
+        }
+
+        .success-icon {
+            width: 96px;
+            height: 96px;
+            background-color: #d1fae5;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            font-size: 3rem;
+        }
+
+        .success-title {
+            font-size: 1.875rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+        }
+
+        .success-subtitle {
+            font-size: 1rem;
+            color: #6b7280;
+            margin-bottom: 1.5rem;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: space-between;
+            margin-top: 2rem;
+        }
+
+        button {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 0.375rem;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            justify-content: center;
+        }
+
+        .btn-primary {
+            background-color: #0097B2;
+            color: white;
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            background-color: #007a8f;
+        }
+
+        .btn-secondary {
+            background-color: #e5e7eb;
+            color: #374151;
+            border: 1px solid #d1d5db;
+        }
+
+        .btn-secondary:hover:not(:disabled) {
+            background-color: #d1d5db;
+        }
+
+        .btn-success {
+            background-color: #10b981;
+            color: white;
+        }
+
+        .btn-success:hover:not(:disabled) {
+            background-color: #059669;
+        }
+
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .nota-fiscal-box {
+            background-color: #eff6ff;
+            border: 2px solid #0097B2;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .nota-fiscal-box h3 {
+            color: #0097B2;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .nota-fiscal-section {
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #bfdbfe;
+        }
+
+        .nota-fiscal-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .nota-fiscal-extracted {
+            background-color: white;
+            border: 1px solid #86efac;
+            border-left: 4px solid #22c55e;
+            padding: 1rem;
+            border-radius: 0.375rem;
+            margin-top: 0.5rem;
+        }
+
+        .nota-fiscal-extracted p {
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .nota-fiscal-extracted strong {
+            color: #1f2937;
+        }
+
+        .textarea-nota {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .conteiner-selection {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .conteiner-section h3 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 1rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid #e5e7eb;
+        }
+
+        .conteiner-section h3.origem {
+            border-bottom-color: #3b82f6;
+            color: #3b82f6;
+        }
+
+        .conteiner-section h3.destino {
+            border-bottom-color: #10b981;
+            color: #10b981;
+        }
+
+        @media (max-width: 768px) {
+            .grid-2,
+            .grid-3,
+            .conteiner-selection {
+                grid-template-columns: 1fr;
+            }
+
+            .stepper {
+                flex-wrap: wrap;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>HXtos CY</h1>
+    </div>
+
+    <div class="container">
+        <!-- Stepper -->
+        <div class="stepper">
+            <div class="step">
+                <div class="step-circle active" id="step-1-circle">1</div>
+            </div>
+            <div class="step-line" id="line-1"></div>
+            <div class="step">
+                <div class="step-circle" id="step-2-circle">2</div>
+            </div>
+            <div class="step-line" id="line-2"></div>
+            <div class="step">
+                <div class="step-circle" id="step-3-circle">3</div>
+            </div>
+            <div class="step-line" id="line-3"></div>
+            <div class="step">
+                <div class="step-circle" id="step-4-circle">4</div>
+            </div>
+            <div class="step-line" id="line-4"></div>
+            <div class="step">
+                <div class="step-circle" id="step-5-circle">5</div>
+            </div>
+            <div class="step-line" id="line-5"></div>
+            <div class="step">
+                <div class="step-circle" id="step-6-circle">6</div>
+            </div>
+        </div>
+
+        <!-- ETAPA 1: DADOS -->
+        <div id="step-1" class="content">
+            <h2>Dados da Operação</h2>
+            <div class="form-group">
+                <label>Agendamento de Entrada *</label>
+                <select id="agendamento" onchange="loadAgendamento()">
+                    <option value="">Selecione um agendamento...</option>
+                    <option value="1">AGD-2026-0001 - ABC-1234 (2026-03-13 08:30)</option>
+                    <option value="2">AGD-2026-0002 - XYZ-5678 (2026-03-13 10:15)</option>
+                </select>
+            </div>
+
+            <div id="agendamento-info" class="info-box hidden">
+                <p><strong>Motorista:</strong> <span id="motorista"></span></p>
+                <p><strong>Placa:</strong> <span id="placa"></span></p>
+                <p><strong>Data de Entrada:</strong> <span id="data-entrada"></span></p>
+            </div>
+
+            <div class="form-group">
+                <label>Responsável pela Operação *</label>
+                <input type="text" id="responsavel" placeholder="Nome do operador ou supervisor">
+            </div>
+        </div>
+
+        <!-- ETAPA 2: SELEÇÃO DE CONTÊINERES (ORIGEM E DESTINO) -->
+        <div id="step-2" class="content hidden">
+            <h2>Seleção de Contêineres</h2>
+            <p style="color: #6b7280; margin-bottom: 1.5rem;">Selecione o contêiner de origem (Cliente) e o contêiner de destino (Armador)</p>
+            
+            <div class="conteiner-selection">
+                <div class="conteiner-section">
+                    <h3 class="origem">📦 Contêiner de Origem (Cliente)</h3>
+                    <div id="conteineres-origem-grid"></div>
+                </div>
+                <div class="conteiner-section">
+                    <h3 class="destino">🚢 Contêiner de Destino (Armador)</h3>
+                    <div id="conteineres-destino-grid"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ETAPA 3: CARGA -->
+        <div id="step-3" class="content hidden">
+            <h2>Conferência de Carga</h2>
+
+            <!-- Campo de Nota Fiscal -->
+            <div class="nota-fiscal-box">
+                <h3>📋 Nota Fiscal (Opcional)</h3>
+                
+                <div class="nota-fiscal-section">
+                    <label class="form-group" style="margin-bottom: 0;">
+                        <span style="display: block; margin-bottom: 0.5rem;">Cole o conteúdo da NF ou XML aqui:</span>
+                        <textarea id="nota-fiscal-text" class="textarea-nota" placeholder="Cole aqui o conteúdo da Nota Fiscal em texto ou XML..."></textarea>
+                    </label>
+                    <button class="btn-primary" onclick="processarNotaFiscalTexto()" style="margin-top: 0.5rem;">Processar Texto</button>
+                </div>
+
+                <div class="nota-fiscal-section">
+                    <label class="form-group" style="margin-bottom: 0;">
+                        <span style="display: block; margin-bottom: 0.5rem;">Ou faça upload do arquivo XML:</span>
+                        <input type="file" id="nota-fiscal-file" accept=".xml,.txt" onchange="handleNotaFiscalFile()">
+                    </label>
+                    <p id="arquivo-carregado" style="margin-top: 0.5rem; color: #22c55e; font-weight: 500; display: none;"></p>
+                </div>
+
+                <div id="nota-fiscal-resultado" class="nota-fiscal-extracted hidden">
+                    <p><strong>✓ Número NF:</strong> <span id="nf-numero"></span></p>
+                    <p><strong>✓ Valor Total:</strong> <span id="nf-valor"></span></p>
+                    <p><strong>✓ Itens:</strong> <span id="nf-itens"></span></p>
+                </div>
+            </div>
+
+            <!-- Tabela de Produtos -->
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Produto</th>
+                        <th>Saldo Anterior</th>
+                        <th>Qtd. Transferência</th>
+                        <th>Novo Saldo</th>
+                    </tr>
+                </thead>
+                <tbody id="produtos-tbody"></tbody>
+            </table>
+
+            <div id="warning-capacidade" class="warning-box hidden">
+                <div class="warning-box-title">⚠ Aviso de Capacidade</div>
+                <div class="warning-box-text" id="warning-text"></div>
+            </div>
+
+            <div class="grid-3" id="stats-grid"></div>
+        </div>
+
+        <!-- ETAPA 4: RESUMO -->
+        <div id="step-4" class="content hidden">
+            <h2>Resumo da Operação</h2>
+            <div class="grid-2">
+                <div class="card">
+                    <div class="card-title">🚚 Dados do Agendamento</div>
+                    <div style="font-size: 0.875rem; margin-top: 0.75rem; line-height: 1.5;">
+                        <p><strong>Número:</strong> <span id="resumo-agd"></span></p>
+                        <p><strong>Placa:</strong> <span id="resumo-placa"></span></p>
+                        <p><strong>Motorista:</strong> <span id="resumo-motorista"></span></p>
+                        <p><strong>Responsável:</strong> <span id="resumo-responsavel"></span></p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">📦 Contêineres</div>
+                    <div style="font-size: 0.875rem; margin-top: 0.75rem; line-height: 1.5;">
+                        <p>
+                            <strong>Origem:</strong> <span id="resumo-origem"></span>
+                            <span class="badge badge-cliente" style="margin-left: 0.5rem;">Cliente</span>
+                        </p>
+                        <p style="margin-top: 0.5rem;">
+                            <strong>Destino:</strong> <span id="resumo-destino"></span>
+                            <span class="badge badge-armador" style="margin-left: 0.5rem;">Armador</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="resumo-nf-box" class="card" style="margin-top: 1rem; border: 2px solid #22c55e; background-color: #f0fdf4; display: none;">
+                <div class="card-title" style="color: #22c55e;">✓ Nota Fiscal Anexada</div>
+                <div style="font-size: 0.875rem; margin-top: 0.75rem; line-height: 1.5;">
+                    <p><strong>Arquivo:</strong> <span id="resumo-nf-arquivo"></span></p>
+                    <p><strong>Número NF:</strong> <span id="resumo-nf-numero"></span></p>
+                    <p><strong>Valor Total:</strong> <span id="resumo-nf-valor"></span></p>
+                    <p><strong>Itens:</strong> <span id="resumo-nf-itens"></span></p>
+                </div>
+            </div>
+
+            <div class="card" style="margin-top: 1rem;">
+                <div class="card-title">📋 Produtos Transferidos</div>
+                <table class="table" style="margin-top: 0.75rem;">
+                    <thead>
+                        <tr>
+                            <th>Produto</th>
+                            <th>Quantidade</th>
+                            <th>Peso Unit.</th>
+                            <th>Peso Total</th>
+                        </tr>
+                    </thead>
+                    <tbody id="resumo-produtos-tbody"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- ETAPA 5: CONFIRMAÇÃO -->
+        <div id="step-5" class="content hidden">
+            <h2>Confirmação Final</h2>
+            <div class="info-box" style="background-color: #fef3c7; border-left-color: #f59e0b;">
+                <p style="font-weight: 600; color: #92400e; margin-bottom: 0.5rem;">⚠ Operação Crítica</p>
+                <p>Você está prestes a confirmar a transferência de carga. Esta ação não pode ser desfeita.</p>
+                <p style="margin-top: 0.5rem;">Verifique todos os dados acima antes de prosseguir.</p>
+            </div>
+        </div>
+
+        <!-- ETAPA 6: RESULTADO -->
+        <div id="step-6" class="content hidden">
+            <div class="success-container">
+                <div class="success-icon">✓</div>
+                <div class="success-title">Crossdocking Realizado com Sucesso!</div>
+                <div class="success-subtitle">Carga transferida e contêineres atualizados</div>
+
+                <div class="card" style="max-width: 400px; margin-bottom: 1.5rem; width: 100%;">
+                    <div style="font-size: 0.875rem; line-height: 1.8;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                            <span>Número de Referência:</span>
+                            <strong>CD-2026-03-13-0001</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                            <span>Data/Hora:</span>
+                            <strong id="resultado-data"></strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                            <span>Agendamento:</span>
+                            <strong id="resultado-agd"></strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                            <span>Contêiner Origem:</span>
+                            <strong id="resultado-origem"></strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                            <span>Contêiner Destino:</span>
+                            <strong id="resultado-destino"></strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Peso Transferido:</span>
+                            <strong id="resultado-peso"></strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Botões de Navegação -->
+        <div class="button-group" id="button-group">
+            <button class="btn-secondary" id="btn-anterior" onclick="anterior()">← Anterior</button>
+            <button class="btn-primary" id="btn-proximo" onclick="proximo()">Próximo →</button>
+        </div>
+
+        <!-- Botão Nova Operação (só aparece no resultado) -->
+        <div id="button-nova-operacao" class="button-group hidden" style="justify-content: center;">
+            <button class="btn-success" onclick="novaOperacao()" style="width: auto;">+ Nova Operação</button>
+        </div>
+    </div>
+
+    <script>
+        const agendamentos = {
+            1: { numero: 'AGD-2026-0001', placa: 'ABC-1234', motorista: 'João Silva', data: '2026-03-13 08:30' },
+            2: { numero: 'AGD-2026-0002', placa: 'XYZ-5678', motorista: 'Maria Santos', data: '2026-03-13 10:15' }
+        };
+
+        const conteineres = [
+            { id: 1, numero: 'MAEU123456', tipo: '40\'', status: 'vazio', posicao: 'P-03/T2', pesoAtual: 0, pesoMaximo: 28000, capacidade: 0, tipo_conteiner: 'cliente' },
+            { id: 2, numero: 'HAPAG789012', tipo: '40\'', status: 'parcial', posicao: 'P-05/T1', pesoAtual: 12000, pesoMaximo: 28000, capacidade: 43, tipo_conteiner: 'cliente' },
+            { id: 3, numero: 'CMA345678', tipo: '20\'', status: 'vazio', posicao: 'P-01/T3', pesoAtual: 0, pesoMaximo: 18000, capacidade: 0, tipo_conteiner: 'armador' },
+            { id: 4, numero: 'OOCL901234', tipo: '40\'', status: 'parcial', posicao: 'P-07/T2', pesoAtual: 20000, pesoMaximo: 28000, capacidade: 71, tipo_conteiner: 'armador' }
+        ];
+
+        const produtos = [
+            { id: 1, nome: 'Farda de Algodão', saldoAnterior: 500, quantidade: 0, pesoUnitario: 50 },
+            { id: 2, nome: 'Bobina de Tecido', saldoAnterior: 200, quantidade: 0, pesoUnitario: 80 }
+        ];
+
+        let currentStep = 1;
+        let selectedOrigemConteiner = null;
+        let selectedDestinoConteiner = null;
+        let notaFiscalData = { numero: '', valor: '', itens: 0, arquivo: '' };
+
+        function loadAgendamento() {
+            const agdId = document.getElementById('agendamento').value;
+            const agdInfo = document.getElementById('agendamento-info');
+            if (agdId) {
+                const agd = agendamentos[agdId];
+                document.getElementById('motorista').textContent = agd.motorista;
+                document.getElementById('placa').textContent = agd.placa;
+                document.getElementById('data-entrada').textContent = agd.data;
+                agdInfo.classList.remove('hidden');
+            } else {
+                agdInfo.classList.add('hidden');
+            }
+        }
+
+        function renderConteineres() {
+            const origemGrid = document.getElementById('conteineres-origem-grid');
+            const destinoGrid = document.getElementById('conteineres-destino-grid');
+
+            const conteineresCliente = conteineres.filter(c => c.tipo_conteiner === 'cliente');
+            const conteineresArmador = conteineres.filter(c => c.tipo_conteiner === 'armador');
+
+            origemGrid.innerHTML = conteineresCliente.map(c => `
+                <div class="card ${selectedOrigemConteiner?.id === c.id ? 'selected' : ''}" onclick="selectOrigemConteiner(${c.id})">
+                    <div class="card-header">
+                        <div>
+                            <div class="card-title">${c.numero}</div>
+                            <div class="card-subtitle">${c.tipo}</div>
+                        </div>
+                        <span class="badge badge-cliente">Cliente</span>
+                    </div>
+                    <div>
+                        <div style="font-size: 0.75rem; color: #6b7280; margin-bottom: 0.25rem;">Capacidade: <strong>${c.capacidade}%</strong></div>
+                        <div class="capacity-bar">
+                            <div class="capacity-fill" style="width: ${c.capacidade}%"></div>
+                        </div>
+                    </div>
+                    <div style="font-size: 0.75rem; color: #6b7280; margin-top: 0.75rem; line-height: 1.5;">
+                        <p><strong>Peso:</strong> ${c.pesoAtual} / ${c.pesoMaximo} kg</p>
+                        <p><strong>Posição:</strong> ${c.posicao}</p>
+                    </div>
+                </div>
+            `).join('');
+
+            destinoGrid.innerHTML = conteineresArmador.map(c => `
+                <div class="card ${selectedDestinoConteiner?.id === c.id ? 'selected' : ''}" onclick="selectDestinoConteiner(${c.id})">
+                    <div class="card-header">
+                        <div>
+                            <div class="card-title">${c.numero}</div>
+                            <div class="card-subtitle">${c.tipo}</div>
+                        </div>
+                        <span class="badge badge-armador">Armador</span>
+                    </div>
+                    <div>
+                        <div style="font-size: 0.75rem; color: #6b7280; margin-bottom: 0.25rem;">Capacidade: <strong>${c.capacidade}%</strong></div>
+                        <div class="capacity-bar">
+                            <div class="capacity-fill" style="width: ${c.capacidade}%"></div>
+                        </div>
+                    </div>
+                    <div style="font-size: 0.75rem; color: #6b7280; margin-top: 0.75rem; line-height: 1.5;">
+                        <p><strong>Peso:</strong> ${c.pesoAtual} / ${c.pesoMaximo} kg</p>
+                        <p><strong>Posição:</strong> ${c.posicao}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function selectOrigemConteiner(id) {
+            selectedOrigemConteiner = conteineres.find(c => c.id === id);
+            renderConteineres();
+        }
+
+        function selectDestinoConteiner(id) {
+            selectedDestinoConteiner = conteineres.find(c => c.id === id);
+            renderConteineres();
+        }
+
+        function renderProdutos() {
+            const tbody = document.getElementById('produtos-tbody');
+            tbody.innerHTML = produtos.map((p, idx) => `
+                <tr>
+                    <td>${p.nome}</td>
+                    <td>${p.saldoAnterior}</td>
+                    <td>
+                        <input type="number" min="0" max="${p.saldoAnterior}" value="${p.quantidade}" 
+                            onchange="updateProduto(${idx}, this.value)">
+                    </td>
+                    <td>${p.saldoAnterior - p.quantidade}</td>
+                </tr>
+            `).join('');
+            updateStats();
+        }
+
+        function updateProduto(idx, value) {
+            produtos[idx].quantidade = Math.min(parseInt(value) || 0, produtos[idx].saldoAnterior);
+            renderProdutos();
+        }
+
+        function updateStats() {
+            const pesoTotal = produtos.reduce((acc, p) => acc + p.quantidade * p.pesoUnitario, 0);
+            const capacidadeDisponivel = selectedDestinoConteiner ? selectedDestinoConteiner.pesoMaximo - selectedDestinoConteiner.pesoAtual : 0;
+            const restante = capacidadeDisponivel - pesoTotal;
+
+            const grid = document.getElementById('stats-grid');
+            grid.innerHTML = `
+                <div class="stat-card">
+                    <div class="stat-label">Peso Total a Transferir</div>
+                    <div class="stat-value">${pesoTotal} kg</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Capacidade Disponível</div>
+                    <div class="stat-value">${capacidadeDisponivel} kg</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Após Transferência</div>
+                    <div class="stat-value">${restante} kg</div>
+                </div>
+            `;
+
+            const warning = document.getElementById('warning-capacidade');
+            if (pesoTotal > capacidadeDisponivel && pesoTotal > 0) {
+                document.getElementById('warning-text').textContent = `O peso total (${pesoTotal} kg) excede a capacidade disponível (${capacidadeDisponivel} kg)`;
+                warning.classList.remove('hidden');
+            } else {
+                warning.classList.add('hidden');
+            }
+        }
+
+        function extractNotaFiscalData(content) {
+            const numeroMatch = content.match(/NFe\d+|NF\s*[:#]?\s*(\d+)|nNF>([\d]+)/i);
+            const valorMatch = content.match(/vNF>([\d.,]+)|Total[:\s]*([\d.,]+)|vTotal>([\d.,]+)/i);
+            const itensMatch = content.match(/<det nItem="(\d+)"/g);
+            
+            notaFiscalData = {
+                numero: numeroMatch ? numeroMatch[1] || numeroMatch[2] : 'Não identificado',
+                valor: valorMatch ? valorMatch[1] || valorMatch[2] || valorMatch[3] : 'Não identificado',
+                itens: itensMatch ? itensMatch.length : 0,
+                arquivo: notaFiscalData.arquivo
+            };
+
+            const resultado = document.getElementById('nota-fiscal-resultado');
+            document.getElementById('nf-numero').textContent = notaFiscalData.numero;
+            document.getElementById('nf-valor').textContent = notaFiscalData.valor;
+            document.getElementById('nf-itens').textContent = notaFiscalData.itens;
+            resultado.classList.remove('hidden');
+        }
+
+        function processarNotaFiscalTexto() {
+            const texto = document.getElementById('nota-fiscal-text').value;
+            if (texto.trim()) {
+                extractNotaFiscalData(texto);
+            } else {
+                alert('Por favor, cole o conteúdo da Nota Fiscal');
+            }
+        }
+
+        function handleNotaFiscalFile() {
+            const file = document.getElementById('nota-fiscal-file').files[0];
+            if (file) {
+                notaFiscalData.arquivo = file.name;
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    const content = event.target.result;
+                    document.getElementById('nota-fiscal-text').value = content;
+                    extractNotaFiscalData(content);
+                    document.getElementById('arquivo-carregado').textContent = '✓ Arquivo carregado: ' + file.name;
+                    document.getElementById('arquivo-carregado').style.display = 'block';
+                };
+                reader.readAsText(file);
+            }
+        }
+
+        function renderResumo() {
+            const agdId = document.getElementById('agendamento').value;
+            const agd = agendamentos[agdId];
+            const pesoTotal = produtos.reduce((acc, p) => acc + p.quantidade * p.pesoUnitario, 0);
+
+            document.getElementById('resumo-agd').textContent = agd.numero;
+            document.getElementById('resumo-placa').textContent = agd.placa;
+            document.getElementById('resumo-motorista').textContent = agd.motorista;
+            document.getElementById('resumo-responsavel').textContent = document.getElementById('responsavel').value;
+            document.getElementById('resumo-origem').textContent = selectedOrigemConteiner.numero;
+            document.getElementById('resumo-destino').textContent = selectedDestinoConteiner.numero;
+
+            const nfBox = document.getElementById('resumo-nf-box');
+            if (notaFiscalData.numero && notaFiscalData.numero !== 'Não identificado') {
+                nfBox.style.display = 'block';
+                document.getElementById('resumo-nf-arquivo').textContent = notaFiscalData.arquivo || 'Texto colado';
+                document.getElementById('resumo-nf-numero').textContent = notaFiscalData.numero;
+                document.getElementById('resumo-nf-valor').textContent = notaFiscalData.valor;
+                document.getElementById('resumo-nf-itens').textContent = notaFiscalData.itens;
+            } else {
+                nfBox.style.display = 'none';
+            }
+
+            const tbody = document.getElementById('resumo-produtos-tbody');
+            const produtosTransferidos = produtos.filter(p => p.quantidade > 0);
+            tbody.innerHTML = produtosTransferidos.map(p => `
+                <tr>
+                    <td>${p.nome}</td>
+                    <td>${p.quantidade}</td>
+                    <td>${p.pesoUnitario} kg</td>
+                    <td><strong>${p.quantidade * p.pesoUnitario} kg</strong></td>
+                </tr>
+            `).join('') + `
+                <tr style="background-color: #f3f4f6; font-weight: 600;">
+                    <td colspan="3" style="text-align: right;">TOTAL:</td>
+                    <td>${pesoTotal} kg</td>
+                </tr>
+            `;
+
+            const now = new Date();
+            document.getElementById('resultado-data').textContent = now.toLocaleString('pt-BR');
+            document.getElementById('resultado-agd').textContent = agd.numero;
+            document.getElementById('resultado-origem').textContent = selectedOrigemConteiner.numero;
+            document.getElementById('resultado-destino').textContent = selectedDestinoConteiner.numero;
+            document.getElementById('resultado-peso').textContent = pesoTotal + ' kg';
+        }
+
+        function goToStep(step) {
+            for (let i = 1; i <= 6; i++) {
+                document.getElementById(`step-${i}`).classList.add('hidden');
+                document.getElementById(`step-${i}-circle`).classList.remove('active');
+            }
+
+            document.getElementById(`step-${step}`).classList.remove('hidden');
+            document.getElementById(`step-${step}-circle`).classList.add('active');
+
+            for (let i = 1; i < step; i++) {
+                document.getElementById(`step-${i}-circle`).classList.add('completed');
+                if (document.getElementById(`line-${i}`)) {
+                    document.getElementById(`line-${i}`).classList.add('active');
+                }
+            }
+
+            document.getElementById('btn-anterior').disabled = step === 1;
+            document.getElementById('button-group').classList.remove('hidden');
+            document.getElementById('button-nova-operacao').classList.add('hidden');
+
+            if (step === 1) {
+                document.getElementById('btn-proximo').textContent = 'Próximo →';
+            } else if (step === 5) {
+                document.getElementById('btn-proximo').textContent = 'Confirmar e Finalizar →';
+            } else if (step === 6) {
+                document.getElementById('button-group').classList.add('hidden');
+                document.getElementById('button-nova-operacao').classList.remove('hidden');
+            } else {
+                document.getElementById('btn-proximo').textContent = 'Próximo →';
+            }
+
+            if (step === 2) renderConteineres();
+            if (step === 3) renderProdutos();
+            if (step === 4) renderResumo();
+
+            currentStep = step;
+        }
+
+        function proximo() {
+            if (currentStep === 1) {
+                if (!document.getElementById('agendamento').value || !document.getElementById('responsavel').value) {
+                    alert('Preencha todos os campos obrigatórios');
+                    return;
+                }
+            } else if (currentStep === 2) {
+                if (!selectedOrigemConteiner || !selectedDestinoConteiner) {
+                    alert('Selecione os contêineres de origem e destino');
+                    return;
+                }
+            } else if (currentStep === 3) {
+                const pesoTotal = produtos.reduce((acc, p) => acc + p.quantidade * p.pesoUnitario, 0);
+                const capacidadeDisponivel = selectedDestinoConteiner.pesoMaximo - selectedDestinoConteiner.pesoAtual;
+                if (pesoTotal === 0 || pesoTotal > capacidadeDisponivel) {
+                    alert('Verifique as quantidades e a capacidade');
+                    return;
+                }
+            }
+
+            if (currentStep < 6) {
+                goToStep(currentStep + 1);
+            }
+        }
+
+        function anterior() {
+            if (currentStep > 1) {
+                goToStep(currentStep - 1);
+            }
+        }
+
+        function novaOperacao() {
+            // Resetar todos os dados
+            document.getElementById('agendamento').value = '';
+            document.getElementById('responsavel').value = '';
+            document.getElementById('agendamento-info').classList.add('hidden');
+            
+            selectedOrigemConteiner = null;
+            selectedDestinoConteiner = null;
+            notaFiscalData = { numero: '', valor: '', itens: 0, arquivo: '' };
+            
+            produtos.forEach(p => p.quantidade = 0);
+            
+            document.getElementById('nota-fiscal-text').value = '';
+            document.getElementById('nota-fiscal-file').value = '';
+            document.getElementById('arquivo-carregado').style.display = 'none';
+            document.getElementById('nota-fiscal-resultado').classList.add('hidden');
+            
+            goToStep(1);
+        }
+
+        // Inicializar
+        goToStep(1);
+    </script>
+</body>
+</html>
